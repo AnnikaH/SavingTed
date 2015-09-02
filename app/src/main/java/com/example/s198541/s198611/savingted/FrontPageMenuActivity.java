@@ -1,5 +1,6 @@
 package com.example.s198541.s198611.savingted;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,11 +28,21 @@ public class FrontPageMenuActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.new_game:
+                Intent i = new Intent(this, GameActivity.class);
+                startActivity(i);
+                return true;
+            case R.id.rules:
+                Intent i2 = new Intent(this, RulesActivity.class);
+                startActivity(i2);
+                return true;
+            case R.id.settings:
+                Intent i3 = new Intent(this, SettingsActivity.class);
+                startActivity(i3);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
 }

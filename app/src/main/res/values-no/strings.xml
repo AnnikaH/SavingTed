@@ -3,6 +3,6 @@
     <string name="settings">Innstillinger</string>
     <string name="menu">Meny</string>
     <string name="rules">Regler</string>
-    <string name="newGame">Nytt spill</string>
+    <string name="new_game">Nytt spill</string>
     <string name="quit">Avslutt</string>
 </resources>
