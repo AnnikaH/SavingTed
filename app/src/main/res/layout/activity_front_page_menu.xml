@@ -2,9 +2,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/hangman_background"
+    tools:context=".FrontPageMenuActivity"
     android:weightSum="1"
-    tools:context=".FrontPageMenuActivity" >
+    android:background="@drawable/hangman_background" >
+
+    <!--android:background="@drawable/hangman_background_animation" NOT WORKING -->
 
     <LinearLayout
         android:layout_width="fill_parent"
