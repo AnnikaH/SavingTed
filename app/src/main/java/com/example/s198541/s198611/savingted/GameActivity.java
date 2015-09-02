@@ -32,14 +32,20 @@ public class GameActivity extends AppCompatActivity {
             case R.id.new_game:
                 Intent i = new Intent(this, GameActivity.class);
                 startActivity(i);
+                // ?:
+                finish();
                 return true;
             case R.id.rules:
                 Intent i2 = new Intent(this, RulesActivity.class);
                 startActivity(i2);
+                // ?:
+                finish();
                 return true;
             case R.id.settings:
                 Intent i3 = new Intent(this, SettingsActivity.class);
                 startActivity(i3);
+                // ?:
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
