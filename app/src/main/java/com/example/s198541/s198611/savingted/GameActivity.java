@@ -17,6 +17,16 @@ import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
+    private static final int TEXT_SIZE_GUESS_WORD = 20;
+    private static final int PADDING_GUESS_WORD = 15;
+    private static final int NEW_LINE_KEYBOARD_FIRST = 9;
+    private static final int NEW_LINE_KEYBOARD_SECOND = 19;
+    private static final int TEXT_SIZE_KEYBOARD = 16;
+    private static final int PADDING_KEYBOARD = 5;
+    private static final int MARGIN_KEYBOARD = 2;
+    private static final int WIDTH_KEYBOARD = 42;
+    private static final int HEIGHT_KEYBOARD = 42;
+
     //private Resources res;
     private String[] words;
     private int index = 0;
@@ -64,10 +74,10 @@ public class GameActivity extends AppCompatActivity {
 
         for(int i = 0; i < chosenWord.length(); i++) {
             TextView textViewLetter = new TextView(this);
-            textViewLetter.setTextSize(20);
+            textViewLetter.setTextSize(TEXT_SIZE_GUESS_WORD);
             textViewLetter.setText("_");
             textViewLetter.setId(i);
-            textViewLetter.setPadding(15, 15, 15, 15);
+            textViewLetter.setPadding(PADDING_GUESS_WORD, PADDING_GUESS_WORD, PADDING_GUESS_WORD, PADDING_GUESS_WORD);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             textViewLetter.setLayoutParams(layoutParams);
             layout.addView(textViewLetter);
@@ -78,18 +88,17 @@ public class GameActivity extends AppCompatActivity {
         LinearLayout layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_1);
 
         for(int i = 0; i < alphabetLetters.length; i++) {
-            if(i >= 9 && i < 19) {
+            if(i >= NEW_LINE_KEYBOARD_FIRST && i < NEW_LINE_KEYBOARD_SECOND) {
                 layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_2);
             }
-            else if(i >= 19) {
+            else if(i >= NEW_LINE_KEYBOARD_SECOND) {
                 layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_3);
             }
 
             Button buttonLetter = new Button(this);
-            buttonLetter.setTextSize(16);
+            buttonLetter.setTextSize(TEXT_SIZE_KEYBOARD);
             buttonLetter.setText(alphabetLetters[i]);
-            //buttonLetter.setBackgroundColor(Color.TRANSPARENT);
-            buttonLetter.setPadding(5, 5, 5, 5);
+            buttonLetter.setPadding(PADDING_KEYBOARD, PADDING_KEYBOARD, PADDING_KEYBOARD, PADDING_KEYBOARD);
             buttonLetter.setBackgroundResource(R.drawable.custom_button);
             buttonLetter.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
@@ -98,8 +107,8 @@ public class GameActivity extends AppCompatActivity {
                     checkGuessedLetter(guessedLetter);
                 }
             });
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(42, 42);
-            layoutParams.setMargins(2, 2, 2, 2);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(WIDTH_KEYBOARD, HEIGHT_KEYBOARD);
+            layoutParams.setMargins(MARGIN_KEYBOARD, MARGIN_KEYBOARD, MARGIN_KEYBOARD, MARGIN_KEYBOARD);
             buttonLetter.setLayoutParams(layoutParams);
 
             layout.addView(buttonLetter);

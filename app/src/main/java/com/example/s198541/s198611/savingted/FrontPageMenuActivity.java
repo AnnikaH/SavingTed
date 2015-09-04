@@ -1,18 +1,11 @@
 package com.example.s198541.s198611.savingted;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Movie;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-
-import java.io.InputStream;
 
 public class FrontPageMenuActivity extends AppCompatActivity {
 
