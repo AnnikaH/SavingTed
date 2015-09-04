@@ -7,7 +7,6 @@
     <string name="menu">Menu</string>
     <string name="rules">Rules</string>
     <string name="new_game">New game</string>
-    <string name="quit">Quit</string>
 
     <!-- For testing: -->
     <string name="testing_text_game">Game</string>

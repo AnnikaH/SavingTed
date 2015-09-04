@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import java.io.InputStream;
 
@@ -19,9 +20,25 @@ public class FrontPageMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_front_page_menu);
+
 //      setContentView(new MyGIFView(getApplicationContext()));
 //      getApplicationContext() possibly not working: MyApp.getContext();
 //      MyApp skal tilsvare manifestfilen sin application: android:name="MyApp"
+    }
+
+    public void newGameButtonClicked(View view) {
+        Intent i = new Intent(this, GameActivity.class);
+        startActivity(i);
+    }
+
+    public void rulesButtonClicked(View view) {
+        Intent i = new Intent(this, RulesActivity.class);
+        startActivity(i);
+    }
+
+    public void settingsButtonClicked(View view) {
+        Intent i = new Intent(this, SettingsActivity.class);
+        startActivity(i);
     }
 
 //    private class MyGIFView extends View {

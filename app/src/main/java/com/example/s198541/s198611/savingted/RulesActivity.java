@@ -33,8 +33,6 @@ public class RulesActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.rules:
-                // ?:
-                finish();
                 return true;
             case R.id.settings:
                 Intent i2 = new Intent(this, SettingsActivity.class);

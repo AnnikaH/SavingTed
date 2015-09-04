@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_weight="0.9" >
     </LinearLayout>
 
     <Button
@@ -22,7 +22,8 @@
         android:id="@+id/new_game_menu_button"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin" />
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:onClick="newGameButtonClicked" />
     <Button
         android:layout_width="@dimen/menu_button_width"
         android:layout_height="@dimen/menu_button_height"
@@ -30,7 +31,8 @@
         android:text="@string/rules"
         android:id="@+id/rules_menu_button"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/activity_vertical_margin" />
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:onClick="rulesButtonClicked" />
     <Button
         android:layout_width="@dimen/menu_button_width"
         android:layout_height="@dimen/menu_button_height"
@@ -38,14 +40,7 @@
         android:text="@string/settings"
         android:id="@+id/settings_menu_button"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/activity_vertical_margin" />
-    <Button
-        android:layout_width="@dimen/menu_button_width"
-        android:layout_height="@dimen/menu_button_height"
-        android:background="@drawable/menu_button_background"
-        android:text="@string/quit"
-        android:id="@+id/quit_menu_button"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/activity_vertical_margin" />
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:onClick="settingsButtonClicked" />
 
 </LinearLayout>

@@ -39,8 +39,6 @@ public class SettingsActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.settings:
-                // ?:
-                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
