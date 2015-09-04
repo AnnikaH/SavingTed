@@ -2,22 +2,25 @@ package com.example.s198541.s198611.savingted;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 public class GameActivity extends AppCompatActivity {
 
-    private Resources res;
+    //private Resources res;
     private String[] words;
     private int index = 0;
-    private String chosenWord;
+    private String currentWord;
 
     private String[] alphabetLetters;
 
@@ -26,14 +29,20 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        res = getResources();
+        Resources res = getResources();
+
         words = res.getStringArray(R.array.listWords);
+        // shuffle words (random which word to guess first):
+        List<String> shuffledList = Arrays.asList(words);
+        Collections.shuffle(shuffledList);
+        words = shuffledList.toArray(new String[shuffledList.size()]);
+
         alphabetLetters = res.getStringArray(R.array.listAlphabet);
 
-        chosenWord = getNextWord();
+        currentWord = getNextWord();
 
-        if(chosenWord != null) {
-            createGuessWordArea(chosenWord);
+        if(currentWord != null) {
+            createGuessWordArea(currentWord);
             createKeyboard();
         }
     }
@@ -80,11 +89,16 @@ public class GameActivity extends AppCompatActivity {
             Button buttonLetter = new Button(this);
             buttonLetter.setTextSize(16);
             buttonLetter.setText(alphabetLetters[i]);
-            buttonLetter.setId(i + 20);
             //buttonLetter.setBackgroundColor(Color.TRANSPARENT);
             buttonLetter.setBackgroundResource(R.drawable.menu_button_background);
             buttonLetter.setPadding(5, 5, 5, 5);    // letters get centered
-
+            buttonLetter.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View view) {
+                    Button b = (Button) view;
+                    char guessedLetter = b.getText().charAt(0);
+                    checkGuessedLetter(guessedLetter);
+                }
+            });
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(45, 45);
             //layoutParams.setMargins(10, 10, 10, 10);
             buttonLetter.setLayoutParams(layoutParams);
@@ -92,17 +106,15 @@ public class GameActivity extends AppCompatActivity {
             layout.addView(buttonLetter);
         }
     }
-//    <TextView
-//        android:id="@+id/guessing_word_letter_1"
-//        android:text="A"
-//        android:layout_width="@dimen/text_width"
-//        android:layout_height="@dimen/text_height" />
-//
-//        <TextView
-//        android:id="@+id/guessing_word_letter_2"
-//        android:text="B"
-//        android:layout_width="@dimen/text_width"
-//        android:layout_height="@dimen/text_height" />
+
+    private void checkGuessedLetter(char letter) {
+        for(int i = 0; i < currentWord.length(); i++) {
+            if(currentWord.charAt(i) == letter) {
+                TextView textViewFoundLetter = (TextView) findViewById(i);
+                textViewFoundLetter.setText(letter + "");
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
