@@ -7,8 +7,55 @@
     android:weightSum="1"
     android:background="@drawable/hangman_background" >
 
-    <TextView android:text="@string/testing_text_game" android:layout_width="fill_parent"
+    <!-- Fill: -->
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="0.8" >
+    </LinearLayout>
+
+    <!-- Space for word to be guessed: -->
+    <LinearLayout
+        android:id="@+id/guessing_word_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_horizontal_margin" >
+        <!-- A TextView for each letter of the word is created in the java-code -->
+    </LinearLayout>
+
+    <!-- Keyboard: -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/keyboard_layout_row_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal" >
+            <!-- Buttons for each letter is created in the java-code -->
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/keyboard_layout_row_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal" >
+            <!-- Buttons for each letter is created in the java-code -->
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/keyboard_layout_row_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal" >
+            <!-- Buttons for each letter is created in the java-code -->
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
