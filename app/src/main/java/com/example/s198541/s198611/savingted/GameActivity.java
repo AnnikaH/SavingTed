@@ -21,7 +21,6 @@ public class GameActivity extends AppCompatActivity {
     private String[] words;
     private int index = 0;
     private String currentWord;
-
     private String[] alphabetLetters;
 
     @Override
@@ -47,7 +46,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private String getNextWord() {
+    public String getNextWord() {
         if(index >= words.length) {
             endOfSession();
             return null;
@@ -56,11 +55,11 @@ public class GameActivity extends AppCompatActivity {
         return words[index++];
     }
 
-    private void endOfSession() {
+    public void endOfSession() {
         // code for what's going to happen when all the words are guessed
     }
 
-    private void createGuessWordArea(String chosenWord) {
+    public void createGuessWordArea(String chosenWord) {
         LinearLayout layout = (LinearLayout) findViewById(R.id.guessing_word_layout);
 
         for(int i = 0; i < chosenWord.length(); i++) {
@@ -75,7 +74,7 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    private void createKeyboard() {
+    public void createKeyboard() {
         LinearLayout layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_1);
 
         for(int i = 0; i < alphabetLetters.length; i++) {
@@ -90,8 +89,8 @@ public class GameActivity extends AppCompatActivity {
             buttonLetter.setTextSize(16);
             buttonLetter.setText(alphabetLetters[i]);
             //buttonLetter.setBackgroundColor(Color.TRANSPARENT);
-            buttonLetter.setBackgroundResource(R.drawable.menu_button_background);
-            buttonLetter.setPadding(5, 5, 5, 5);    // letters get centered
+            buttonLetter.setPadding(5, 5, 5, 5);
+            buttonLetter.setBackgroundResource(R.drawable.custom_button);
             buttonLetter.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     Button b = (Button) view;
@@ -99,15 +98,15 @@ public class GameActivity extends AppCompatActivity {
                     checkGuessedLetter(guessedLetter);
                 }
             });
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(45, 45);
-            //layoutParams.setMargins(10, 10, 10, 10);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(42, 42);
+            layoutParams.setMargins(2, 2, 2, 2);
             buttonLetter.setLayoutParams(layoutParams);
 
             layout.addView(buttonLetter);
         }
     }
 
-    private void checkGuessedLetter(char letter) {
+    public void checkGuessedLetter(char letter) {
         for(int i = 0; i < currentWord.length(); i++) {
             if(currentWord.charAt(i) == letter) {
                 TextView textViewFoundLetter = (TextView) findViewById(i);
