@@ -2,6 +2,7 @@ package com.example.s198541.s198611.savingted;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -17,21 +18,21 @@ import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
-    private static final int TEXT_SIZE_GUESS_WORD = 20;
-    private static final int PADDING_GUESS_WORD = 15;
+    private static final int GUESS_WORD_TEXT_SIZE = 20;
+    private static final int GUESS_WORD_PADDING = 15;
     private static final int NEW_LINE_KEYBOARD_FIRST = 9;
     private static final int NEW_LINE_KEYBOARD_SECOND = 19;
-    private static final int TEXT_SIZE_KEYBOARD = 16;
-    private static final int PADDING_KEYBOARD = 5;
-    private static final int MARGIN_KEYBOARD = 2;
-    private static final int WIDTH_KEYBOARD = 42;
-    private static final int HEIGHT_KEYBOARD = 42;
+    private static final int KEYBOARD_TEXT_SIZE = 16;
+    private static final int KEYBOARD_PADDING = 5;
+    private static final int KEYBOARD_MARGIN = 2;
+    private static final int KEYBOARD_WIDTH = 42;
+    private static final int KEYBOARD_HEIGHT = 42;
 
-    //private Resources res;
     private String[] words;
     private int index = 0;
     private String currentWord;
     private String[] alphabetLetters;
+    private int numLettersGuessed = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,7 @@ public class GameActivity extends AppCompatActivity {
 
         Resources res = getResources();
 
+        // reading words from xml-file:
         words = res.getStringArray(R.array.listWords);
         // shuffle words (random which word to guess first):
         List<String> shuffledList = Arrays.asList(words);
@@ -54,19 +56,23 @@ public class GameActivity extends AppCompatActivity {
             createGuessWordArea(currentWord);
             createKeyboard();
         }
+        else {
+            endOfSession();
+        }
     }
 
     public String getNextWord() {
-        if(index >= words.length) {
-            endOfSession();
+        if(index >= words.length)
             return null;
-        }
 
         return words[index++];
     }
 
     public void endOfSession() {
         // code for what's going to happen when all the words are guessed
+        // pop-up with message and then start a new game?
+        // ..
+
     }
 
     public void createGuessWordArea(String chosenWord) {
@@ -74,10 +80,10 @@ public class GameActivity extends AppCompatActivity {
 
         for(int i = 0; i < chosenWord.length(); i++) {
             TextView textViewLetter = new TextView(this);
-            textViewLetter.setTextSize(TEXT_SIZE_GUESS_WORD);
+            textViewLetter.setTextSize(GUESS_WORD_TEXT_SIZE);
             textViewLetter.setText("_");
             textViewLetter.setId(i);
-            textViewLetter.setPadding(PADDING_GUESS_WORD, PADDING_GUESS_WORD, PADDING_GUESS_WORD, PADDING_GUESS_WORD);
+            textViewLetter.setPadding(GUESS_WORD_PADDING, GUESS_WORD_PADDING, GUESS_WORD_PADDING, GUESS_WORD_PADDING);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             textViewLetter.setLayoutParams(layoutParams);
             layout.addView(textViewLetter);
@@ -96,32 +102,66 @@ public class GameActivity extends AppCompatActivity {
             }
 
             Button buttonLetter = new Button(this);
-            buttonLetter.setTextSize(TEXT_SIZE_KEYBOARD);
+            buttonLetter.setTextSize(KEYBOARD_TEXT_SIZE);
             buttonLetter.setText(alphabetLetters[i]);
-            buttonLetter.setPadding(PADDING_KEYBOARD, PADDING_KEYBOARD, PADDING_KEYBOARD, PADDING_KEYBOARD);
+            buttonLetter.setPadding(KEYBOARD_PADDING, KEYBOARD_PADDING, KEYBOARD_PADDING, KEYBOARD_PADDING);
             buttonLetter.setBackgroundResource(R.drawable.custom_button);
+
             buttonLetter.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     Button b = (Button) view;
                     char guessedLetter = b.getText().charAt(0);
-                    checkGuessedLetter(guessedLetter);
+
+                    // disable onclick on the button:
+                    b.setEnabled(false);
+
+                    if (validGuessedLetter(guessedLetter)) {
+                        // change color for the letter to green:
+                        b.setTextColor(Color.GREEN);
+
+                        if(numLettersGuessed == currentWord.length()) {
+                            // the word is guessed - the player won
+                            wordGuessed();
+                        }
+                    } else {
+                        // change color for the letter to red
+                        b.setTextColor(Color.RED);
+
+                        // show next image, if this was the last image: game over
+                        // ..
+
+                    }
                 }
             });
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(WIDTH_KEYBOARD, HEIGHT_KEYBOARD);
-            layoutParams.setMargins(MARGIN_KEYBOARD, MARGIN_KEYBOARD, MARGIN_KEYBOARD, MARGIN_KEYBOARD);
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(KEYBOARD_WIDTH, KEYBOARD_HEIGHT);
+            layoutParams.setMargins(KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN);
             buttonLetter.setLayoutParams(layoutParams);
 
             layout.addView(buttonLetter);
         }
     }
 
-    public void checkGuessedLetter(char letter) {
+    public boolean validGuessedLetter(char letter) {
+        boolean valid = false;
+
         for(int i = 0; i < currentWord.length(); i++) {
             if(currentWord.charAt(i) == letter) {
                 TextView textViewFoundLetter = (TextView) findViewById(i);
                 textViewFoundLetter.setText(letter + "");
+                numLettersGuessed++;
+                valid = true;
             }
         }
+
+        return valid;
+    }
+
+    public void wordGuessed() {
+        // the player guessed the word
+        // continue the session - getNextWord(); // ret. ev. null
+        // ..
+
     }
 
     @Override
