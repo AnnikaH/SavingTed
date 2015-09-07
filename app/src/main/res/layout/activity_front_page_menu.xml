@@ -2,17 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FrontPageMenuActivity"
-    android:weightSum="1"
-    android:background="@drawable/hangman_background" >
+    android:background="@color/grassGreen"
+    tools:context=".FrontPageMenuActivity" >
 
-    <!--android:background="@drawable/hangman_background_animation" NOT WORKING -->
+    <!--android:background="@drawable/hangman_background"-->
+    <!--android:weightSum="1"-->
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.9" >
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="0.9" >-->
+    <!--</LinearLayout>-->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/image_height"
+        android:background="@drawable/hangman_forste" />
 
     <Button
         android:layout_width="@dimen/menu_button_width"

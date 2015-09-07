@@ -12,4 +12,6 @@
 
     <dimen name="keyboard_button_height">20dp</dimen>
     <dimen name="keyboard_button_width">20dp</dimen>
+
+    <dimen name="image_height">250dp</dimen>
 </resources>
