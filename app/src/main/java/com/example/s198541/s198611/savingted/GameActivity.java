@@ -102,6 +102,7 @@ public class GameActivity extends AppCompatActivity {
             }
 
             Button buttonLetter = new Button(this);
+            buttonLetter.setTextColor(Color.WHITE);
             buttonLetter.setTextSize(KEYBOARD_TEXT_SIZE);
             buttonLetter.setText(alphabetLetters[i]);
             buttonLetter.setPadding(KEYBOARD_PADDING, KEYBOARD_PADDING, KEYBOARD_PADDING, KEYBOARD_PADDING);
