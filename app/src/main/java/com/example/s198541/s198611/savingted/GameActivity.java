@@ -2,9 +2,8 @@ package com.example.s198541.s198611.savingted;
 
 import android.content.Intent;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -31,22 +30,24 @@ public class GameActivity extends AppCompatActivity {
     private static final int KEYBOARD_WIDTH = 42;
     private static final int KEYBOARD_HEIGHT = 42;
 
+    private final int[] imageIds = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
+            R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6, R.drawable.hangman_siste};
+
     private String[] words;
     private int wordCounter = 0;
     private String currentWord;
     private String[] alphabetLetters;
     private int numLettersGuessed = 0;
-    private Resources res;
     private int imageCounter = 0;
-    int[] imageIds = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
-            R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6, R.drawable.hangman_siste};
+    private int gamesWon = 0;       // TODO: SharedPreferences: Store the value when game finished and read the value when the game starts
+    private int gamesTotal = 0;     // TODO: SharedPreferences: Store the value when game finished and read the value when the game starts
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        res = getResources();
+        Resources res = getResources();
 
         // reading words from xml-file:
         words = res.getStringArray(R.array.listWords);
@@ -74,15 +75,9 @@ public class GameActivity extends AppCompatActivity {
         return words[wordCounter++];
     }
 
-    public void endOfSession() {
-        // code for what's going to happen when all the words are guessed
-        // pop-up with message and then start a new game?
-        // ..
-
-    }
-
     public void createGuessWordArea(String chosenWord) {
         LinearLayout layout = (LinearLayout) findViewById(R.id.guessing_word_layout);
+        layout.removeAllViews();    // if there is a word here from before the TextViews are removed
 
         for (int i = 0; i < chosenWord.length(); i++) {
             TextView textViewLetter = new TextView(this);
@@ -125,27 +120,22 @@ public class GameActivity extends AppCompatActivity {
                         // change color for the letter to green:
                         b.setTextColor(Color.GREEN);
 
-                        if (numLettersGuessed >= currentWord.length()) {
+                        if (numLettersGuessed >= currentWord.length())
                             // the word is guessed - the player won
-                            wordGuessed();
-                        }
+                            endOfGame(true);
                     } else {
                         // change color for the letter to red
                         b.setTextColor(Color.RED);
 
-                        // show next image
+                        // show next image in the ImageView main_image:
                         ImageView imageView = (ImageView) findViewById(R.id.main_image);
                         imageView.setBackgroundResource(imageIds[imageCounter++]);
-
-                        // TypedArray imageArray = res.obtainTypedArray(R.array.stepByStepImages);
-                        // Drawable drawable = imageArray.getDrawable(imageCounter++);
 
                         // if this was the last image: weren't able to guess the word
                         // if now imageCounter is the same as the length of the image-array,
                         // the last image has been shown and the player didn't solve the word
-                        if (imageCounter >= imageIds.length) {
-                            wordNotGuessed();
-                        }
+                        if (imageCounter >= imageIds.length)
+                            endOfGame(false);
                     }
                 }
             });
@@ -156,6 +146,16 @@ public class GameActivity extends AppCompatActivity {
 
             layout.addView(buttonLetter);
         }
+    }
+
+    public void clearKeyboard() {
+        LinearLayout layoutRow1 = (LinearLayout) findViewById(R.id.keyboard_layout_row_1);
+        LinearLayout layoutRow2 = (LinearLayout) findViewById(R.id.keyboard_layout_row_2);
+        LinearLayout layoutRow3 = (LinearLayout) findViewById(R.id.keyboard_layout_row_3);
+
+        layoutRow1.removeAllViews();
+        layoutRow2.removeAllViews();
+        layoutRow3.removeAllViews();
     }
 
     public boolean validGuessedLetter(char letter) {
@@ -173,20 +173,47 @@ public class GameActivity extends AppCompatActivity {
         return valid;
     }
 
-    // This and wordNotGuessed() related - maybe make just one method?
+    // TODO: Finish this
+    public void endOfGame(boolean wordGuessed) {
+        String message = "";
 
-    public void wordGuessed() {
-        // the player guessed the word
-        // pop-up
-        // continue the session - getNextWord(); // ret. ev. null
-        // ..
+        if (wordGuessed) {  // the player guessed the word
+            message += "";
+            gamesWon++; // TODO: Store this value (SharedPreferences)
+        } else {            // the player did not guess the word
+            message += "";
+        }
 
+        // TODO: create pop-up with message (waits until player clicks OK) ..
+
+        gamesTotal++;   // TODO: Store this value (SharedPreferences)
+        currentWord = getNextWord();
+
+        if(currentWord != null) {
+            resetValues();
+            createGuessWordArea(currentWord);
+        }
+        else {
+            endOfSession();
+        }
     }
 
-    public void wordNotGuessed() {
-        // the player didn't guess the word
-        // pop-up
-        // continue the session - getNextWord();
+    // Called after a game has been won or lost (the player guessed the word or not)
+    public void resetValues() {
+        numLettersGuessed = 0;
+        imageCounter = 0;
+        ImageView imageView = (ImageView) findViewById(R.id.main_image);
+        imageView.setBackgroundResource(R.drawable.hangman_forste);
+        clearKeyboard();
+        createKeyboard();
+    }
+
+    // TODO: Finish this
+    // Called when all the words are guessed
+    public void endOfSession() {
+        // code for what's going to happen when all the words are guessed
+        // pop-up with message and then start a new game?
+        // ..
 
     }
 
