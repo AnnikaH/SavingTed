@@ -32,19 +32,21 @@ public class GameActivity extends AppCompatActivity {
     private static final int KEYBOARD_HEIGHT = 42;
 
     private String[] words;
-    private int index = 0;
+    private int wordCounter = 0;
     private String currentWord;
     private String[] alphabetLetters;
     private int numLettersGuessed = 0;
     private Resources res;
-    private int imagecounter = 0;
+    private int imageCounter = 0;
+    int[] imageIds = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
+            R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6, R.drawable.hangman_siste};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-       res = getResources();
+        res = getResources();
 
         // reading words from xml-file:
         words = res.getStringArray(R.array.listWords);
@@ -57,20 +59,19 @@ public class GameActivity extends AppCompatActivity {
 
         currentWord = getNextWord();
 
-        if(currentWord != null) {
+        if (currentWord != null) {
             createGuessWordArea(currentWord);
             createKeyboard();
-        }
-        else {
+        } else {
             endOfSession();
         }
     }
 
     public String getNextWord() {
-        if(index >= words.length)
+        if (wordCounter >= words.length)
             return null;
 
-        return words[index++];
+        return words[wordCounter++];
     }
 
     public void endOfSession() {
@@ -83,7 +84,7 @@ public class GameActivity extends AppCompatActivity {
     public void createGuessWordArea(String chosenWord) {
         LinearLayout layout = (LinearLayout) findViewById(R.id.guessing_word_layout);
 
-        for(int i = 0; i < chosenWord.length(); i++) {
+        for (int i = 0; i < chosenWord.length(); i++) {
             TextView textViewLetter = new TextView(this);
             textViewLetter.setTextSize(GUESS_WORD_TEXT_SIZE);
             textViewLetter.setText("_");
@@ -98,11 +99,10 @@ public class GameActivity extends AppCompatActivity {
     public void createKeyboard() {
         LinearLayout layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_1);
 
-        for(int i = 0; i < alphabetLetters.length; i++) {
-            if(i >= NEW_LINE_KEYBOARD_FIRST && i < NEW_LINE_KEYBOARD_SECOND) {
+        for (int i = 0; i < alphabetLetters.length; i++) {
+            if (i >= NEW_LINE_KEYBOARD_FIRST && i < NEW_LINE_KEYBOARD_SECOND) {
                 layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_2);
-            }
-            else if(i >= NEW_LINE_KEYBOARD_SECOND) {
+            } else if (i >= NEW_LINE_KEYBOARD_SECOND) {
                 layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_3);
             }
 
@@ -125,7 +125,7 @@ public class GameActivity extends AppCompatActivity {
                         // change color for the letter to green:
                         b.setTextColor(Color.GREEN);
 
-                        if (numLettersGuessed == currentWord.length()) {
+                        if (numLettersGuessed >= currentWord.length()) {
                             // the word is guessed - the player won
                             wordGuessed();
                         }
@@ -133,22 +133,19 @@ public class GameActivity extends AppCompatActivity {
                         // change color for the letter to red
                         b.setTextColor(Color.RED);
 
-                        // show next image, if this was the last image: game over
-                        // ..
+                        // show next image
+                        ImageView imageView = (ImageView) findViewById(R.id.main_image);
+                        imageView.setBackgroundResource(imageIds[imageCounter++]);
 
-                        TypedArray array = res.obtainTypedArray(R.array.stepByStepImages);
-                        if (imagecounter < array.length()) {
+                        // TypedArray imageArray = res.obtainTypedArray(R.array.stepByStepImages);
+                        // Drawable drawable = imageArray.getDrawable(imageCounter++);
 
-                            ImageView vindu = (ImageView) findViewById(R.id.main_image);
-                            Drawable drawable = array.getDrawable(imagecounter++);
-                            vindu.setBackground(drawable);
-                             // vindu.setBackgroundResource(array.getDrawable(imagecounter));
-
-                        } else {
-
+                        // if this was the last image: weren't able to guess the word
+                        // if now imageCounter is the same as the length of the image-array,
+                        // the last image has been shown and the player didn't solve the word
+                        if (imageCounter >= imageIds.length) {
+                            wordNotGuessed();
                         }
-
-
                     }
                 }
             });
@@ -164,8 +161,8 @@ public class GameActivity extends AppCompatActivity {
     public boolean validGuessedLetter(char letter) {
         boolean valid = false;
 
-        for(int i = 0; i < currentWord.length(); i++) {
-            if(currentWord.charAt(i) == letter) {
+        for (int i = 0; i < currentWord.length(); i++) {
+            if (currentWord.charAt(i) == letter) {
                 TextView textViewFoundLetter = (TextView) findViewById(i);
                 textViewFoundLetter.setText(letter + "");
                 numLettersGuessed++;
@@ -176,10 +173,20 @@ public class GameActivity extends AppCompatActivity {
         return valid;
     }
 
+    // This and wordNotGuessed() related - maybe make just one method?
+
     public void wordGuessed() {
         // the player guessed the word
+        // pop-up
         // continue the session - getNextWord(); // ret. ev. null
         // ..
+
+    }
+
+    public void wordNotGuessed() {
+        // the player didn't guess the word
+        // pop-up
+        // continue the session - getNextWord();
 
     }
 
