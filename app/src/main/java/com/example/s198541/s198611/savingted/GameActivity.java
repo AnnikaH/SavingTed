@@ -2,13 +2,16 @@ package com.example.s198541.s198611.savingted;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,13 +36,15 @@ public class GameActivity extends AppCompatActivity {
     private String currentWord;
     private String[] alphabetLetters;
     private int numLettersGuessed = 0;
+    private Resources res;
+    private int imagecounter = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        Resources res = getResources();
+       res = getResources();
 
         // reading words from xml-file:
         words = res.getStringArray(R.array.listWords);
@@ -120,7 +125,7 @@ public class GameActivity extends AppCompatActivity {
                         // change color for the letter to green:
                         b.setTextColor(Color.GREEN);
 
-                        if(numLettersGuessed == currentWord.length()) {
+                        if (numLettersGuessed == currentWord.length()) {
                             // the word is guessed - the player won
                             wordGuessed();
                         }
@@ -130,6 +135,19 @@ public class GameActivity extends AppCompatActivity {
 
                         // show next image, if this was the last image: game over
                         // ..
+
+                        TypedArray array = res.obtainTypedArray(R.array.stepByStepImages);
+                        if (imagecounter < array.length()) {
+
+                            ImageView vindu = (ImageView) findViewById(R.id.main_image);
+                            Drawable drawable = array.getDrawable(imagecounter++);
+                            vindu.setBackground(drawable);
+                             // vindu.setBackgroundResource(array.getDrawable(imagecounter));
+
+                        } else {
+
+                        }
+
 
                     }
                 }
