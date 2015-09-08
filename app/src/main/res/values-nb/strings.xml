@@ -4,6 +4,7 @@
     <string name="menu">Meny</string>
     <string name="rules">Regler</string>
     <string name="new_game">Nytt spill</string>
+    <string name="testing_text_rules">Regler</string>
     <string name="rules_explained">Ted har blitt fanget! Du kan redde Ted ved å gjette riktig ord. Du har 7 sjanser til å gjette riktig ord,
     ved å klikke på bokstavene. </string>
 </resources>
