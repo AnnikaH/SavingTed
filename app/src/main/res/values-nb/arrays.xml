@@ -3,6 +3,20 @@
     <string-array name="listWords">
         <item>AKROBAT</item>
         <item>QUIZ</item>
+        <item>APEKATT</item>
+        <item>TELEFON</item>
+        <item>ANDROID</item>
+        <item>HÅNDBALL</item>
+        <item>TZAZIKI</item>
+        <item>HJULVISP</item>
+        <item>ANDROID</item>
+        <item>LYKTESTOLPE</item>
+        <item>VALS</item>
+        <item>SEKRETÆR</item>
+        <item>ASPARGESSUPPE</item>
+        <item>NORDLYS</item>
+        <item>KÅLRABI</item>
+
     </string-array>
 
     <string-array name="listAlphabet">
