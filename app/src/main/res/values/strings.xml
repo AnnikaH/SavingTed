@@ -7,6 +7,8 @@
     <string name="menu">Menu</string>
     <string name="rules">Rules</string>
     <string name="new_game">New game</string>
+     <string name="rules_explained">Ted have been captured! You can save Ted by guessing the correct word. You got 7 chances to guess the right word,
+    by clicking on the letters.</string>
 
     <!-- For testing: -->
     <string name="testing_text_game">Game</string>
