@@ -27,8 +27,8 @@ public class GameActivity extends AppCompatActivity {
     private static final int KEYBOARD_TEXT_SIZE = 16;
     private static final int KEYBOARD_PADDING = 5;
     private static final int KEYBOARD_MARGIN = 2;
-    private static final int KEYBOARD_WIDTH = 42;
-    private static final int KEYBOARD_HEIGHT = 42;
+    private static final int KEYBOARD_WIDTH = 50;
+    private static final int KEYBOARD_HEIGHT = 50;
 
     private final int[] imageIds = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
             R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6, R.drawable.hangman_siste};
