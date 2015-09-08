@@ -21,15 +21,15 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity {
 
     private static final int GUESS_WORD_TEXT_SIZE = 20;
-    private static final int GUESS_WORD_PADDING = 15;
+    private static final int GUESS_WORD_PADDING = 8;
     private static final int NEW_LINE_KEYBOARD_FIRST = 10;
     private static final int NEW_LINE_KEYBOARD_SECOND = 20;
     private static final int KEYBOARD_TEXT_SIZE = 16;
-    //private static final int KEYBOARD_PADDING = 5;
-    private static final int KEYBOARD_PADDING_HORIZONTAL = 3;
-    private static final int KEYBOARD_PADDING_VERTICAL = 7;
+    // private static final int KEYBOARD_PADDING = 5;
+    // private static final int KEYBOARD_PADDING_HORIZONTAL = 3;
+    // private static final int KEYBOARD_PADDING_VERTICAL = 7;
     private static final int KEYBOARD_MARGIN = 2;
-    private static final int KEYBOARD_WIDTH = 45;
+    private static final int KEYBOARD_WIDTH = 40;
     private static final int KEYBOARD_HEIGHT = 55;
 
     private final int[] imageIds = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
@@ -107,8 +107,8 @@ public class GameActivity extends AppCompatActivity {
             buttonLetter.setTextColor(Color.WHITE);
             buttonLetter.setTextSize(KEYBOARD_TEXT_SIZE);
             buttonLetter.setText(alphabetLetters[i]);
-            buttonLetter.setPadding(KEYBOARD_PADDING_HORIZONTAL, KEYBOARD_PADDING_VERTICAL,
-                    KEYBOARD_PADDING_HORIZONTAL, KEYBOARD_PADDING_VERTICAL);
+            //buttonLetter.setPadding(KEYBOARD_PADDING_HORIZONTAL, KEYBOARD_PADDING_VERTICAL,
+            //        KEYBOARD_PADDING_HORIZONTAL, KEYBOARD_PADDING_VERTICAL);
             buttonLetter.setBackgroundResource(R.drawable.custom_button);
 
             buttonLetter.setOnClickListener(new View.OnClickListener() {
