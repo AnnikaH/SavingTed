@@ -192,11 +192,10 @@ public class GameActivity extends AppCompatActivity {
         gamesTotal++;   // TODO: Store this value (SharedPreferences)
         currentWord = getNextWord();
 
-        if(currentWord != null) {
+        if (currentWord != null) {
             resetValues();
             createGuessWordArea(currentWord);
-        }
-        else {
+        } else {
             endOfSession();
         }
     }
