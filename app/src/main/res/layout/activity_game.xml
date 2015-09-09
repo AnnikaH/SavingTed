@@ -1,21 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grassGreen"
     tools:context=".FrontPageMenuActivity" >
-    <!--android:weightSum="1"-->
-    <!--android:background="@drawable/hangman_background"-->
 
-    <!-- Fill: -->
-    <!--<LinearLayout-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="0.8" >-->
-    <!--</LinearLayout>-->
-
-    <ImageView
+    <ImageView android:contentDescription="@string/image_description"
         android:id="@+id/main_image"
         android:layout_width="match_parent"
         android:layout_height="@dimen/image_height"
@@ -31,8 +23,6 @@
         android:layout_marginBottom="@dimen/activity_horizontal_margin" >
         <!-- A TextView for each letter of the word is created in the java-code -->
     </LinearLayout>
-
-    <!--android:layout_marginTop="@dimen/activity_horizontal_margin"-->
 
     <!-- Keyboard: -->
     <LinearLayout
@@ -64,6 +54,7 @@
             android:gravity="center_horizontal" >
             <!-- Buttons for each letter is created in the java-code -->
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
