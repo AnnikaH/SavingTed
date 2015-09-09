@@ -17,7 +17,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class GameActivity extends AppCompatActivity implements EndGameDialog.DialogClickListener {
+public class GameActivity extends AppCompatActivity implements EndGameDialog.DialogClickListener,
+        EndSessionDialog.DialogClickListener {
 
     private static final int GUESS_WORD_TEXT_SIZE = 20;
     private static final int GUESS_WORD_PADDING = 8;
@@ -49,6 +50,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 
         // reading words from xml-file:
         words = res.getStringArray(R.array.listWords);
+
         // shuffle words (random which word to guess first):
         List<String> shuffledList = Arrays.asList(words);
         Collections.shuffle(shuffledList);
@@ -79,6 +81,20 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         }
     }
 
+    // EndSessionDialog-method:
+    @Override
+    public void onNewGameClick() {
+        Intent i = new Intent(this, GameActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    // EndSessionDialog-method:
+    @Override
+    public void onQuitGameClick() {
+        finish();
+    }
+
     public String getNextWord() {
         if (wordCounter >= words.length)
             return null;
@@ -96,7 +112,8 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
             textViewLetter.setText("_");
             textViewLetter.setId(i);
             textViewLetter.setPadding(GUESS_WORD_PADDING, 0, GUESS_WORD_PADDING, 0);
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
             textViewLetter.setLayoutParams(layoutParams);
             layout.addView(textViewLetter);
         }
@@ -170,18 +187,18 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     }
 
     public boolean correctGuessedLetter(char letter) {
-        boolean valid = false;
+        boolean correct = false;
 
         for (int i = 0; i < currentWord.length(); i++) {
             if (currentWord.charAt(i) == letter) {
                 TextView textViewFoundLetter = (TextView) findViewById(i);
                 textViewFoundLetter.setText(letter + "");
                 numLettersGuessed++;
-                valid = true;
+                correct = true;
             }
         }
 
-        return valid;
+        return correct;
     }
 
     public void endOfGameDialog(boolean wordGuessed) {
@@ -217,13 +234,18 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         createKeyboard();
     }
 
-    // TODO: Finish this
     // Called when all the words are guessed
     public void endOfSession() {
-        // code for what's going to happen when all the words are guessed
         // pop-up with message and then start a new game?
-        // ..
+        String title = getString(R.string.end_of_session_title);
+        String message = getString(R.string.end_of_session);
 
+        // Creating pop-up/dialog with title and message that has a NEW GAME-button and a
+        // Quit-button:
+        EndSessionDialog dialog = EndSessionDialog.newInstance(title, message);
+        dialog.show(getFragmentManager(), "TAG");
+        // When the user clicks NEW GAME the method onNewGameClick() is called
+        // When the user click QUIT the method onQuitGameClick() is called
     }
 
     @Override

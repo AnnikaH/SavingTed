@@ -7,12 +7,17 @@
     <string name="rules_explained">Ted har blitt fanget! Du kan redde Ted ved å gjette riktig ord.
         Du har 7 sjanser til å gjette riktig ord, ved å klikke på bokstavene. </string>
 
+    <string name="word_guessed_title">Hurra!</string>
+    <string name="word_not_guessed_title">Å nei..</string>
     <string name="word_guessed">Det var riktig! Ted er veldig glad for at du reddet ham! Kan du
         redde ham igjen?</string>
     <string name="word_was">Stakkars Ted..! Ordet var</string>
     <string name="word_not_guessed">Neste ord venter. Prøv å redde ham!</string>
-    <string name="word_guessed_title">Hurra!</string>
-    <string name="word_not_guessed_title">Å nei..</string>
+
+    <string name="end_of_session_title">Runden er over</string>
+    <string name="end_of_session">Du har gjettet alle ordene! Start et nytt spill for å spille mer.</string>
+
+    <string name="quit">Avslutt</string>
 
     <string name="image_description">Ted</string>
 </resources>

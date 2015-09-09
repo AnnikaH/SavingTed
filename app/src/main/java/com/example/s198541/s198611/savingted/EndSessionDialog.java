@@ -6,11 +6,12 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-public class EndGameDialog extends DialogFragment {
+public class EndSessionDialog extends DialogFragment {
     private DialogClickListener callback;
 
     public interface DialogClickListener {
-        void onOkClick();
+        void onNewGameClick();
+        void onQuitGameClick();
     }
 
     @Override
@@ -24,8 +25,8 @@ public class EndGameDialog extends DialogFragment {
         }
     }
 
-    public static EndGameDialog newInstance(String title, String message) {
-        EndGameDialog frag = new EndGameDialog();
+    public static EndSessionDialog newInstance(String title, String message) {
+        EndSessionDialog frag = new EndSessionDialog();
         Bundle args = new Bundle();
         args.putString("title", title);
         args.putString("message", message);
@@ -40,10 +41,16 @@ public class EndGameDialog extends DialogFragment {
         AlertDialog dialog = new AlertDialog.Builder(getActivity())
                 .setTitle(bundle.getString("title"))
                 .setMessage(bundle.getString("message"))
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.new_game, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        callback.onOkClick();
+                        callback.onNewGameClick();
+                    }
+                })
+                .setNegativeButton(R.string.quit, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        callback.onQuitGameClick();
                     }
                 }).create();
 
