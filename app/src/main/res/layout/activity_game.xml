@@ -5,56 +5,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grassGreen"
-    tools:context=".FrontPageMenuActivity" >
+    tools:context=".FrontPageMenuActivity"
+    android:weightSum="1" >
 
+    <!-- layout_weight 0.5 on the ImageView: -->
     <ImageView android:contentDescription="@string/image_description"
         android:id="@+id/main_image"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/image_height"
-        android:background="@drawable/hangman_forste" />
+        android:layout_height="match_parent"
+        android:background="@drawable/hangman_forste"
+        android:layout_weight="0.5" />
 
-    <!-- Space for word to be guessed: -->
-    <LinearLayout
-        android:id="@+id/guessing_word_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin" >
-        <!-- A TextView for each letter of the word is created in the java-code -->
-    </LinearLayout>
-
-    <!-- Keyboard: -->
+    <!-- layout_weight 0.5 on the rest: -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin" >
 
+        <!-- Space for word to be guessed: -->
         <LinearLayout
-            android:id="@+id/keyboard_layout_row_1"
+            android:id="@+id/guessing_word_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_horizontal" >
-            <!-- Buttons for each letter is created in the java-code -->
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/activity_horizontal_margin" >
+            <!-- A TextView for each letter of the word is created in the java-code -->
         </LinearLayout>
+
+        <!-- Space for keyboard: -->
         <LinearLayout
-            android:id="@+id/keyboard_layout_row_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal" >
-            <!-- Buttons for each letter is created in the java-code -->
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/keyboard_layout_row_3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal" >
-            <!-- Buttons for each letter is created in the java-code -->
-        </LinearLayout>
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/keyboard_layout_row_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal" >
+                <!-- Buttons for each letter is created in the java-code -->
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/keyboard_layout_row_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal" >
+                <!-- Buttons for each letter is created in the java-code -->
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/keyboard_layout_row_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:paddingBottom="@dimen/activity_horizontal_margin" >
+                <!-- Buttons for each letter is created in the java-code -->
+            </LinearLayout>
+
+        </LinearLayout> <!-- End of layout for keyboard -->
 
     </LinearLayout>
-
 </LinearLayout>

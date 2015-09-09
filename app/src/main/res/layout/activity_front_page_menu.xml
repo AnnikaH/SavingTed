@@ -1,17 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grassGreen"
     tools:context=".FrontPageMenuActivity"
     android:weightSum="1" >
 
+    <!-- layout_weight 0.5 on the ImageView: -->
     <ImageView android:contentDescription="@string/image_description"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/hangman_forste"
         android:layout_weight="0.5" />
 
+    <!-- layout_weight 0.5 on the button-area: -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,5 +55,4 @@
             android:textColor="@color/white" />
 
     </LinearLayout>
-
 </LinearLayout>

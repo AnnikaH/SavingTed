@@ -25,7 +25,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     private static final int NEW_LINE_KEYBOARD_SECOND = 20;
     private static final int KEYBOARD_TEXT_SIZE = 16;
     private static final int KEYBOARD_MARGIN = 2;
-    private static final int KEYBOARD_WIDTH = 40;
+    private static final int KEYBOARD_WIDTH = 38;
     private static final int KEYBOARD_HEIGHT = 55;
 
     private final int[] imageIds = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
@@ -95,7 +95,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
             textViewLetter.setTextSize(GUESS_WORD_TEXT_SIZE);
             textViewLetter.setText("_");
             textViewLetter.setId(i);
-            textViewLetter.setPadding(GUESS_WORD_PADDING, GUESS_WORD_PADDING, GUESS_WORD_PADDING, GUESS_WORD_PADDING);
+            textViewLetter.setPadding(GUESS_WORD_PADDING, 0, GUESS_WORD_PADDING, 0);
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             textViewLetter.setLayoutParams(layoutParams);
             layout.addView(textViewLetter);
