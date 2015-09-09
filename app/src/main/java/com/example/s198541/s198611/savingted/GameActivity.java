@@ -64,7 +64,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
             createGuessWordArea(currentWord);
             createKeyboard();
         } else {
-            endOfSession();
+            endOfSessionDialog();
         }
     }
 
@@ -77,7 +77,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
             resetValues();
             createGuessWordArea(currentWord);
         } else {
-            endOfSession();
+            endOfSessionDialog();
         }
     }
 
@@ -129,6 +129,8 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
                 layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_3);
             }
 
+            // Creating a button (one button for each letter) for the keyboard and adding it to
+            // the specified layout:
             Button buttonLetter = new Button(this);
             buttonLetter.setTextColor(Color.WHITE);
             buttonLetter.setTextSize(KEYBOARD_TEXT_SIZE);
@@ -234,14 +236,13 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         createKeyboard();
     }
 
-    // Called when all the words are guessed
-    public void endOfSession() {
-        // pop-up with message and then start a new game?
+    // Called when all the words have been used
+    public void endOfSessionDialog() {
         String title = getString(R.string.end_of_session_title);
         String message = getString(R.string.end_of_session);
 
         // Creating pop-up/dialog with title and message that has a NEW GAME-button and a
-        // Quit-button:
+        // QUIT-button:
         EndSessionDialog dialog = EndSessionDialog.newInstance(title, message);
         dialog.show(getFragmentManager(), "TAG");
         // When the user clicks NEW GAME the method onNewGameClick() is called
@@ -257,9 +258,8 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // Handle action bar item clicks here. The action bar will automatically handle clicks on
+        // the Home/Up button, so long as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
         switch (id) {
