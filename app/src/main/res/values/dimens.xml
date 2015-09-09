@@ -11,6 +11,7 @@
     <dimen name="keyboard_button_width">20dp</dimen>
 
     <dimen name="text_size_header">25sp</dimen>
+    <dimen name="text_size">16sp</dimen>
 
     <!-- TODO: Remove later when layout weight fixed for all layout-files: -->
     <dimen name="image_height">250dp</dimen>

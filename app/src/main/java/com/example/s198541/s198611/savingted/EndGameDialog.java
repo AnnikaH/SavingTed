@@ -13,6 +13,13 @@ public class EndGameDialog extends DialogFragment {
         void onOkClick();
     }
 
+    // If the player clicks outside the dialog, the game goes to the next word (onOkClick()):
+    @Override
+    public void onDestroyView() {
+        callback.onOkClick();
+        super.onDestroyView();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
