@@ -2,16 +2,6 @@
 <resources>
     <!-- Default is english: -->
 
-    <!--<array name="stepByStepImages">-->
-        <!--<item>@drawable/hangman_forste</item>-->
-        <!--<item>@drawable/hangman_2</item>-->
-        <!--<item>@drawable/hangman_3</item>-->
-        <!--<item>@drawable/hangman_4</item>-->
-        <!--<item>@drawable/hangman_5</item>-->
-        <!--<item>@drawable/hangman_6</item>-->
-        <!--<item>@drawable/hangman_siste</item>-->
-    <!--</array>-->
-    
     <string-array name="listWords">
         <item>ACROBAT</item>
         <item>QUIZ</item>
@@ -26,6 +16,7 @@
         <item>CROWN</item>
         <item>CABBAGE</item>
         <item>AIRPLANE</item>
+        <item>LAMP</item>
     </string-array>
 
     <string-array name="listAlphabet">
