@@ -12,13 +12,12 @@ public class RulesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rules);
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_front_page_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_rules, menu);
         return true;
     }
 
@@ -30,15 +29,11 @@ public class RulesActivity extends AppCompatActivity {
             case R.id.new_game:
                 Intent i = new Intent(this, GameActivity.class);
                 startActivity(i);
-                // ?:
                 finish();
-                return true;
-            case R.id.rules:
                 return true;
             case R.id.settings:
                 Intent i2 = new Intent(this, SettingsActivity.class);
                 startActivity(i2);
-                // ?:
                 finish();
                 return true;
             default:

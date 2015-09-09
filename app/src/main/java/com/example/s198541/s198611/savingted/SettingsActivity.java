@@ -17,7 +17,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_front_page_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_settings, menu);
         return true;
     }
 
@@ -29,16 +29,12 @@ public class SettingsActivity extends AppCompatActivity {
             case R.id.new_game:
                 Intent i = new Intent(this, GameActivity.class);
                 startActivity(i);
-                // ?:
                 finish();
                 return true;
             case R.id.rules:
                 Intent i2 = new Intent(this, RulesActivity.class);
                 startActivity(i2);
-                // ?:
                 finish();
-                return true;
-            case R.id.settings:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
