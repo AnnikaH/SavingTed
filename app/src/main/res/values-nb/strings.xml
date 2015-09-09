@@ -5,6 +5,12 @@
     <string name="rules">Regler</string>
     <string name="new_game">Nytt spill</string>
     <string name="testing_text_rules">Regler</string>
-    <string name="rules_explained">Ted har blitt fanget! Du kan redde Ted ved å gjette riktig ord. Du har 7 sjanser til å gjette riktig ord,
-    ved å klikke på bokstavene. </string>
+    <string name="rules_explained">Ted har blitt fanget! Du kan redde Ted ved å gjette riktig ord.
+        Du har 7 sjanser til å gjette riktig ord, ved å klikke på bokstavene. </string>
+
+    <string name="wordGuessed">Det var riktig! Ted er veldig glad for at du reddet ham! Kan du redde ham igjen?</string>
+    <string name="wordWas">Stakkars Ted..! Ordet var</string>
+    <string name="wordNotGuessed">Neste ord venter. Prøv å redde ham!</string>
+    <string name="wordGuessedTitle">Hurra!</string>
+    <string name="wordNotGuessedTitle">Å nei..</string>
 </resources>

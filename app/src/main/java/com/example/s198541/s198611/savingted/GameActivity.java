@@ -3,7 +3,6 @@ package com.example.s198541.s198611.savingted;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -18,7 +17,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity implements EndGameDialog.DialogClickListener {
 
     private static final int GUESS_WORD_TEXT_SIZE = 20;
     private static final int GUESS_WORD_PADDING = 8;
@@ -65,6 +64,19 @@ public class GameActivity extends AppCompatActivity {
         if (currentWord != null) {
             createGuessWordArea(currentWord);
             createKeyboard();
+        } else {
+            endOfSession();
+        }
+    }
+
+    // EndGameDialog-method:
+    @Override
+    public void onOkClick() {
+        currentWord = getNextWord();
+
+        if (currentWord != null) {
+            resetValues();
+            createGuessWordArea(currentWord);
         } else {
             endOfSession();
         }
@@ -119,13 +131,13 @@ public class GameActivity extends AppCompatActivity {
                     // disable onclick on the button:
                     b.setEnabled(false);
 
-                    if (validGuessedLetter(guessedLetter)) {
+                    if (correctGuessedLetter(guessedLetter)) {
                         // change color for the letter to green:
                         b.setTextColor(Color.GREEN);
 
                         if (numLettersGuessed >= currentWord.length())
                             // the word is guessed - the player won
-                            endOfGame(true);
+                            endOfGameDialog(true);
                     } else {
                         // change color for the letter to red
                         b.setTextColor(Color.RED);
@@ -134,11 +146,12 @@ public class GameActivity extends AppCompatActivity {
                         ImageView imageView = (ImageView) findViewById(R.id.main_image);
                         imageView.setBackgroundResource(imageIds[imageCounter++]);
 
-                        // if this was the last image: weren't able to guess the word
-                        // if now imageCounter is the same as the length of the image-array,
-                        // the last image has been shown and the player didn't solve the word
-                        if (imageCounter >= imageIds.length)
-                            endOfGame(false);
+                        // If this was the last image: weren't able to guess the word
+                        // If now, after imageCounter++, imageCounter is the same as the length of
+                        // the image-array, the last image has just been shown, and the player
+                        // weren't able to guess the word
+                        if(imageCounter >= imageIds.length)
+                            endOfGameDialog(false);
                     }
                 }
             });
@@ -161,7 +174,7 @@ public class GameActivity extends AppCompatActivity {
         layoutRow3.removeAllViews();
     }
 
-    public boolean validGuessedLetter(char letter) {
+    public boolean correctGuessedLetter(char letter) {
         boolean valid = false;
 
         for (int i = 0; i < currentWord.length(); i++) {
@@ -176,31 +189,30 @@ public class GameActivity extends AppCompatActivity {
         return valid;
     }
 
-    // TODO: Finish this
-    public void endOfGame(boolean wordGuessed) {
-        String message = "";
+    public void endOfGameDialog(boolean wordGuessed) {
+        String title;
+        String message;
 
         if (wordGuessed) {  // the player guessed the word
-            message += "";
+            title = getString(R.string.wordGuessedTitle);
+            message = getString(R.string.wordGuessed);
             gamesWon++; // TODO: Store this value (SharedPreferences)
         } else {            // the player did not guess the word
-            message += "";
+            title = getString(R.string.wordNotGuessedTitle);
+            message = getString(R.string.wordWas) + " " + currentWord + ".\n\n";
+            message += getString(R.string.wordNotGuessed);
         }
-
-        // TODO: create pop-up with message (waits until player clicks OK) ..
 
         gamesTotal++;   // TODO: Store this value (SharedPreferences)
-        currentWord = getNextWord();
 
-        if (currentWord != null) {
-            resetValues();
-            createGuessWordArea(currentWord);
-        } else {
-            endOfSession();
-        }
+        // Creating pop-up/dialog with title and message that has an OK-button:
+        EndGameDialog dialog = EndGameDialog.newInstance(title, message);
+        dialog.show(getFragmentManager(), "TAG");
+        // When the user clicks OK (the only button), the method onOkClick() is called
     }
 
     // Called after a game has been won or lost (the player guessed the word or not)
+    // Called after the player has clicked the OK-button for the dialog/pop-up
     public void resetValues() {
         numLettersGuessed = 0;
         imageCounter = 0;
