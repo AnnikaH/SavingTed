@@ -15,7 +15,7 @@
     <string name="word_not_guessed">Neste ord venter. Prøv å redde ham!</string>
 
     <string name="end_of_session_title">Runden er over</string>
-    <string name="end_of_session">Du har gjettet alle ordene! Start et nytt spill for å spille mer.</string>
+    <string name="end_of_session">Du har gjettet alle ordene!\nStart et nytt spill for å spille mer.</string>
 
     <string name="quit">Avslutt</string>
 

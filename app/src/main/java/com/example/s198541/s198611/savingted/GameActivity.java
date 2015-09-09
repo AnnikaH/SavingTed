@@ -213,7 +213,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
             gamesWon++; // TODO: Store this value (SharedPreferences)
         } else {            // the player did not guess the word
             title = getString(R.string.word_not_guessed_title);
-            message = getString(R.string.word_was) + " " + currentWord + ".\n\n";
+            message = getString(R.string.word_was) + " " + currentWord + ". ";
             message += getString(R.string.word_not_guessed);
         }
 
