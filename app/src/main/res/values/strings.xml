@@ -11,12 +11,12 @@
     <string name="rules_explained">Ted has been captured! You can save Ted by guessing the correct
         word. You got 7 chances to guess the right word, by clicking on the letters.</string>
 
-    <string name="wordGuessed">That was correct! Ted is very happy you saved him! Can you save him
+    <string name="word_guessed">That was correct! Ted is very happy you saved him! Can you save him
         again?</string>
-    <string name="wordWas"> Poor Ted..! The word was</string>
-    <string name="wordNotGuessed">The next word is waiting. Try to save him!</string>
-    <string name="wordGuessedTitle">Hurray!</string>
-    <string name="wordNotGuessedTitle">Oh no..</string>
+    <string name="word_was">Poor Ted..! The word was</string>
+    <string name="word_not_guessed">The next word is waiting. Try to save him!</string>
+    <string name="word_guessed_title">Hurray!</string>
+    <string name="word_not_guessed_title">Oh no..</string>
 
-    <string name="imageDescription">Ted</string>
+    <string name="image_description">Ted</string>
 </resources>

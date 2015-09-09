@@ -189,13 +189,13 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         String message;
 
         if (wordGuessed) {  // the player guessed the word
-            title = getString(R.string.wordGuessedTitle);
-            message = getString(R.string.wordGuessed);
+            title = getString(R.string.word_guessed_title);
+            message = getString(R.string.word_guessed);
             gamesWon++; // TODO: Store this value (SharedPreferences)
         } else {            // the player did not guess the word
-            title = getString(R.string.wordNotGuessedTitle);
-            message = getString(R.string.wordWas) + " " + currentWord + ".\n\n";
-            message += getString(R.string.wordNotGuessed);
+            title = getString(R.string.word_not_guessed_title);
+            message = getString(R.string.word_was) + " " + currentWord + ".\n\n";
+            message += getString(R.string.word_not_guessed);
         }
 
         gamesTotal++;   // TODO: Store this value (SharedPreferences)
