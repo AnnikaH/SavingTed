@@ -34,6 +34,10 @@ public class FrontPageMenuActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void quitButtonClicked(View view) {
+        finish();
+    }
+
 //    private class MyGIFView extends View {
 //        Movie movie;
 //        InputStream is = null;
