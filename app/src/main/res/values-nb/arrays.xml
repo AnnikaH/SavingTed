@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Category-section: -->
+
+    <string-array name="listCategories">
+        <item>I butikken</item>
+        <item>Ute</item>
+        <item>Dyr</item>
+        <item>Alle</item>
+    </string-array>
+
+    <!-- TODO: Fill in items: -->
+    <string-array name="listWordsAtTheStore">
+
+    </string-array>
+
+    <!-- TODO: Fill in items: -->
+    <string-array name="listWordsOutside">
+
+    </string-array>
+
+    <!-- TODO: Fill in items: -->
+    <string-array name="listWordsAnimals">
+
+    </string-array>
+
+    <!-- End Category-section -->
+
+    <!-- Difficulty-section: -->
+
+    <string-array name="listDifficulties">
+        <item>Lett</item>
+        <item>Middels</item>
+        <item>Vanskelig</item>
+        <item>Alle</item>
+    </string-array>
+
+    <!-- TODO: Fill in items: -->
+    <string-array name="listWordsEasy">
+
+    </string-array>
+
+    <!-- TODO: Fill in items: -->
+    <string-array name="listWordsNormal">
+
+    </string-array>
+
+    <!-- TODO: Fill in items: -->
+    <string-array name="listWordsHard">
+
+    </string-array>
+
+    <!-- End Difficulty-section -->
+
     <string-array name="listWords">
         <item>AKROBAT</item>
         <item>QUIZ</item>

@@ -20,4 +20,11 @@
     <string name="quit">Avslutt</string>
 
     <string name="image_description">Ted</string>
+
+    <string name="reset_games_title">Nullstill</string>
+    <string name="reset_games">Nullstill antall spilte spill og antall spill vunnet</string>
+
+    <string name="change_category_title">Kategori</string>
+    <string name="change_difficulty_title">Vanskelighetsgrad</string>
+    <string name="change_language_title">Språk</string>
 </resources>

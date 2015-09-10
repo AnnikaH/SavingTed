@@ -2,10 +2,14 @@ package com.example.s198541.s198611.savingted;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import java.util.Locale;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -21,6 +25,36 @@ public class SettingsActivity extends AppCompatActivity {
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
+
+            // TODO: setSummary to the chosen category:
+            // Preference catPref = findPreference("change_category");
+            // catPref.setSummary(...); - stored where?
+
+            // TODO: setSummary to the chosen difficulty:
+            // Preference diffPref = findPreference("change_difficulty");
+            // diffPref.setSummary(...); - stored where?
+
+            Preference langPref = findPreference("change_language");
+            langPref.setSummary(Locale.getDefault().getDisplayLanguage());
+            langPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent i = new Intent(Settings.ACTION_LOCALE_SETTINGS);
+                    startActivity(i);
+                    return true;
+                }
+            });
+
+            Preference resetPref = findPreference("reset_games");
+
+            resetPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    // TODO: sharedPreferences gamesWon og gamesTotal = 0. Dialog with warning first?
+
+                    return true;
+                }
+            });
         }
     }
 

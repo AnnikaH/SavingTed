@@ -2,6 +2,58 @@
 <resources>
     <!-- Default is english: -->
 
+    <!-- Category-section: -->
+
+    <string-array name="listCategories">
+        <item>At the store</item>
+        <item>Outside</item>
+        <item>Animals</item>
+        <item>All</item>
+    </string-array>
+
+    <!-- TODO: Fill in items: -->
+    <string-array name="listWordsAtTheStore">
+
+    </string-array>
+
+    <!-- TODO: Fill in items: -->
+    <string-array name="listWordsOutside">
+
+    </string-array>
+
+    <!-- TODO: Fill in items: -->
+    <string-array name="listWordsAnimals">
+
+    </string-array>
+
+    <!-- End Category-section -->
+
+    <!-- Difficulty-section: -->
+
+    <string-array name="listDifficulties">
+        <item>Easy</item>
+        <item>Normal</item>
+        <item>Hard</item>
+        <item>All</item>
+    </string-array>
+
+    <!-- TODO: Fill in items: -->
+    <string-array name="listWordsEasy">
+
+    </string-array>
+
+    <!-- TODO: Fill in items: -->
+    <string-array name="listWordsNormal">
+
+    </string-array>
+
+    <!-- TODO: Fill in items: -->
+    <string-array name="listWordsHard">
+
+    </string-array>
+
+    <!-- End Difficulty-section -->
+
     <string-array name="listWords">
         <item>ACROBAT</item>
         <item>QUIZ</item>
