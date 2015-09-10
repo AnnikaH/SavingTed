@@ -6,6 +6,7 @@
     <string name="new_game">Nytt spill</string>
     <string name="rules_explained">Ted har blitt fanget! Du kan redde Ted ved å gjette riktig ord.
         Du har 7 sjanser til å gjette riktig ord, ved å klikke på bokstavene. </string>
+    <string name="quit">Avslutt</string>
 
     <string name="word_guessed_title">Hurra!</string>
     <string name="word_not_guessed_title">Å nei..</string>
@@ -17,14 +18,11 @@
     <string name="end_of_session_title">Runden er over</string>
     <string name="end_of_session">Du har gjettet alle ordene!\nStart et nytt spill for å spille mer.</string>
 
-    <string name="quit">Avslutt</string>
-
     <string name="image_description">Ted</string>
-
-    <string name="reset_games_title">Nullstill</string>
-    <string name="reset_games">Nullstill antall spilte spill og antall spill vunnet</string>
 
     <string name="change_category_title">Kategori</string>
     <string name="change_difficulty_title">Vanskelighetsgrad</string>
     <string name="change_language_title">Språk</string>
+    <string name="reset_games_title">Nullstill</string>
+    <string name="reset_games">Nullstill antall spilte spill og antall spill vunnet</string>
 </resources>
