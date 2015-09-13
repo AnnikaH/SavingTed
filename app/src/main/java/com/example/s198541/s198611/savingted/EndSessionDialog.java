@@ -43,13 +43,13 @@ public class EndSessionDialog extends DialogFragment {
                 .setMessage(bundle.getString("message"))
                 .setPositiveButton(R.string.new_game, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    public void onClick(DialogInterface dialog, int which) {
                         callback.onNewGameClick();
                     }
                 })
                 .setNegativeButton(R.string.quit, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    public void onClick(DialogInterface dialog, int which) {
                         callback.onQuitGameClick();
                     }
                 }).create();

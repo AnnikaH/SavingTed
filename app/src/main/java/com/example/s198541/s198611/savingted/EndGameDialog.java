@@ -42,7 +42,7 @@ public class EndGameDialog extends DialogFragment {
                 .setMessage(bundle.getString("message"))
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int whichButton) {
+                    public void onClick(DialogInterface dialog, int which) {
                         callback.onOkClick();
                     }
                 }).create();
