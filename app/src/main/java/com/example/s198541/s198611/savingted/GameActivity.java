@@ -5,7 +5,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,8 +29,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     private static final int KEYBOARD_MARGIN = 2;
     private static final int KEYBOARD_WIDTH = 38;
     private static final int KEYBOARD_HEIGHT = 55;
-
-    private final int[] imageIds = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
+    private static final int[] IMAGE_IDS = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
             R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6, R.drawable.hangman_siste};
 
     private Resources res;
@@ -43,7 +41,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     private int imageCounter = 0;
     private int gamesWon;
     private int gamesTotal;
-    private int categoryIndex;
+    private int chosenCategoryIndex;
 
     // Store in SharedPreferences:
     @Override
@@ -94,7 +92,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     // NewGameDialog-method:
     @Override
     public void onItemClick(int chosenItemIndex) {
-        categoryIndex = chosenItemIndex;
+        chosenCategoryIndex = chosenItemIndex;
         setWordsFromCategoryChoice();
 
         currentWord = getNextWord();
@@ -115,7 +113,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 
     public void setWordsFromCategoryChoice() {
         // reading words from the right category from xml-file (arrays.xml):
-        switch(categoryIndex) {
+        switch(chosenCategoryIndex) {
             case 0:
                 words = res.getStringArray(R.array.listWordsAtTheStore);
                 break;
@@ -235,13 +233,13 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 
                         // show next image in the ImageView main_image:
                         ImageView imageView = (ImageView) findViewById(R.id.main_image);
-                        imageView.setBackgroundResource(imageIds[imageCounter++]);
+                        imageView.setBackgroundResource(IMAGE_IDS[imageCounter++]);
 
                         // If this was the last image: weren't able to guess the word
                         // If now, after imageCounter++, imageCounter is the same as the length of
                         // the image-array, the last image has just been shown, and the player
                         // weren't able to guess the word
-                        if (imageCounter >= imageIds.length)
+                        if (imageCounter >= IMAGE_IDS.length)
                             endOfGameDialog(false);
                     }
                 }
