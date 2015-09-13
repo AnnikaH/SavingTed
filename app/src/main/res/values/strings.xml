@@ -21,7 +21,7 @@
     <string name="word_not_guessed">The next word is waiting. Try to save him!</string>
 
     <string name="end_of_session_title">The round is over</string>
-    <string name="end_of_session">You have guessed all the words!\nStart a new game to play more.</string>
+    <string name="end_of_session">You have guessed all the words! Start a new game to play more.</string>
 
     <string name="image_description">Ted</string>
 
@@ -30,4 +30,6 @@
     <string name="change_language_title">Language</string>
     <string name="reset_games_title">Reset</string>
     <string name="reset_games">Reset number of games played and games won</string>
+
+    <string name="cancel">Cancel</string>
 </resources>

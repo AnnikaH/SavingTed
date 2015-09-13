@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Contain: Games won: .., Games played: .., Reset-button -->
+
+
+<EditTextPreference xmlns:android="http://schemas.android.com/apk/res/android">
+
+</EditTextPreference>

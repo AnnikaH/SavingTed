@@ -9,49 +9,33 @@
         <item>Alle</item>
     </string-array>
 
-    <!-- TODO: Fill in items: -->
     <string-array name="listWordsAtTheStore">
-
+        <item>KÅL</item>
+        <item>MAGASIN</item>
+        <item>BRØD</item>
+        <item>KJØTT</item>
+        <item>MELK</item>
     </string-array>
 
-    <!-- TODO: Fill in items: -->
     <string-array name="listWordsOutside">
-
+        <item>GRESS</item>
+        <item>HIMMEL</item>
+        <item>FONTENE</item>
+        <item>BLOMST</item>
+        <item>BIL</item>
     </string-array>
 
-    <!-- TODO: Fill in items: -->
     <string-array name="listWordsAnimals">
-
+        <item>APEKATT</item>
+        <item>GRIS</item>
+        <item>KANIN</item>
+        <item>ULV</item>
+        <item>ILDER</item>
     </string-array>
 
     <!-- End Category-section -->
 
-    <!-- Difficulty-section: -->
-
-    <string-array name="listDifficulties">
-        <item>Lett</item>
-        <item>Middels</item>
-        <item>Vanskelig</item>
-        <item>Alle</item>
-    </string-array>
-
-    <!-- TODO: Fill in items: -->
-    <string-array name="listWordsEasy">
-
-    </string-array>
-
-    <!-- TODO: Fill in items: -->
-    <string-array name="listWordsNormal">
-
-    </string-array>
-
-    <!-- TODO: Fill in items: -->
-    <string-array name="listWordsHard">
-
-    </string-array>
-
-    <!-- End Difficulty-section -->
-
+    <!-- USED EARLIER: -->
     <string-array name="listWords">
         <item>AKROBAT</item>
         <item>QUIZ</item>

@@ -16,7 +16,7 @@
     <string name="word_not_guessed">Neste ord venter. Prøv å redde ham!</string>
 
     <string name="end_of_session_title">Runden er over</string>
-    <string name="end_of_session">Du har gjettet alle ordene!\nStart et nytt spill for å spille mer.</string>
+    <string name="end_of_session">Du har gjettet alle ordene! Start et nytt spill for å spille mer.</string>
 
     <string name="image_description">Ted</string>
 
@@ -25,4 +25,6 @@
     <string name="change_language_title">Språk</string>
     <string name="reset_games_title">Nullstill</string>
     <string name="reset_games">Nullstill antall spilte spill og antall spill vunnet</string>
+
+    <string name="cancel">Avbryt</string>
 </resources>

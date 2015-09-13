@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,12 +14,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity implements EndGameDialog.DialogClickListener,
-        EndSessionDialog.DialogClickListener {
+        EndSessionDialog.DialogClickListener, NewGameDialog.DialogClickListener {
 
     private static final int GUESS_WORD_TEXT_SIZE = 20;
     private static final int GUESS_WORD_PADDING = 8;
@@ -32,31 +34,68 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     private final int[] imageIds = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
             R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6, R.drawable.hangman_siste};
 
+    private Resources res;
     private String[] words;
     private int wordCounter = 0;
     private String currentWord;
     private String[] alphabetLetters;
     private int numLettersGuessed = 0;
     private int imageCounter = 0;
-    private int gamesWon = 0;       // TODO: SharedPreferences: Store the value when game finished and read the value when the game starts
-    private int gamesTotal = 0;     // TODO: SharedPreferences: Store the value when game finished and read the value when the game starts
+    private int gamesWon;
+    private int gamesTotal;
+    private int categoryIndex;
+
+    // Store in SharedPreferences:
+    @Override
+    protected void onPause() {
+        super.onPause();
+        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+                .putString("gamesWon", gamesWon + "").putString("gamesTotal", gamesTotal + "")
+                .commit();
+    }
+
+    // Get values from SharedPreferences:
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        String gamesWonString = (getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("gamesWon", ""));
+        String gamesTotalString = (getSharedPreferences("PREFERENCE", MODE_PRIVATE)
+                .getString("gamesTotal", ""));
+
+        try {
+            gamesWon = Integer.parseInt(gamesWonString);
+            gamesTotal = Integer.parseInt(gamesTotalString);
+        } catch (NumberFormatException nfe) {
+            gamesWon = 0;
+            gamesTotal = 0;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        Resources res = getResources();
-
-        // reading words from xml-file:
-        words = res.getStringArray(R.array.listWords);
-
-        // shuffle words (random which word to guess first):
-        List<String> shuffledList = Arrays.asList(words);
-        Collections.shuffle(shuffledList);
-        words = shuffledList.toArray(new String[shuffledList.size()]);
+        res = getResources();
 
         alphabetLetters = res.getStringArray(R.array.listAlphabet);
+
+        String[] categories = res.getStringArray(R.array.listCategories);
+
+        // Pop-up-dialogs where the player chooses category:
+        String catTitle = "Choose a category";
+        NewGameDialog catDialog = NewGameDialog.newInstance(catTitle, categories);
+        catDialog.show(getFragmentManager(), "TAG");
+        // Waiting for the player to make a choice
+    }
+
+    // NewGameDialog-method:
+    @Override
+    public void onItemClick(int chosenItemIndex) {
+        categoryIndex = chosenItemIndex;
+        setWordsFromCategoryChoice();
 
         currentWord = getNextWord();
 
@@ -66,6 +105,44 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         } else {
             endOfSessionDialog();
         }
+    }
+
+    // NewGameDialog-method:
+    @Override
+    public void onCancelClick() {
+        finish();
+    }
+
+    public void setWordsFromCategoryChoice() {
+        // reading words from the right category from xml-file (arrays.xml):
+        switch(categoryIndex) {
+            case 0:
+                words = res.getStringArray(R.array.listWordsAtTheStore);
+                break;
+            case 1:
+                words = res.getStringArray(R.array.listWordsOutside);
+                break;
+            case 2:
+                words = res.getStringArray(R.array.listWordsAnimals);
+                break;
+            default:
+                String[] atTheStoreWords = res.getStringArray(R.array.listWordsAtTheStore);
+                String[] outsideWords = res.getStringArray(R.array.listWordsOutside);
+                String[] animalsWords = res.getStringArray(R.array.listWordsAnimals);
+
+                List<String> allWords = new ArrayList<>();
+                allWords.addAll(Arrays.asList(atTheStoreWords));
+                allWords.addAll(Arrays.asList(outsideWords));
+                allWords.addAll(Arrays.asList(animalsWords));
+
+                words = allWords.toArray(new String[allWords.size()]);
+                break;
+        }
+
+        // shuffle words (random which word to guess first):
+        List<String> shuffledList = Arrays.asList(words);
+        Collections.shuffle(shuffledList);
+        words = shuffledList.toArray(new String[shuffledList.size()]);
     }
 
     // EndGameDialog-method:
@@ -164,7 +241,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
                         // If now, after imageCounter++, imageCounter is the same as the length of
                         // the image-array, the last image has just been shown, and the player
                         // weren't able to guess the word
-                        if(imageCounter >= imageIds.length)
+                        if (imageCounter >= imageIds.length)
                             endOfGameDialog(false);
                     }
                 }
@@ -210,14 +287,14 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         if (wordGuessed) {  // the player guessed the word
             title = getString(R.string.word_guessed_title);
             message = getString(R.string.word_guessed);
-            gamesWon++; // TODO: Store this value (SharedPreferences)
+            gamesWon++;
         } else {            // the player did not guess the word
             title = getString(R.string.word_not_guessed_title);
             message = getString(R.string.word_was) + " " + currentWord + ". ";
             message += getString(R.string.word_not_guessed);
         }
 
-        gamesTotal++;   // TODO: Store this value (SharedPreferences)
+        gamesTotal++;
 
         // Creating pop-up/dialog with title and message that has an OK-button:
         EndGameDialog dialog = EndGameDialog.newInstance(title, message);
