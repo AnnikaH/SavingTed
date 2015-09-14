@@ -20,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity implements EndGameDialog.DialogClickListener,
-        EndSessionDialog.DialogClickListener, NewGameDialog.DialogClickListener {
+        EndSessionDialog.DialogClickListener, NewGameDialog.DialogClickListener, ResetWarningDialog.DialogClickListener {
 
     // TODO: Many of these values can be elements in dimens.xml and we can get to them via R.dimen.name ?
     private static final int GUESS_WORD_TEXT_SIZE = 20;
@@ -143,14 +143,36 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         finish();
     }
 
-    // Reset values-button clicked: Reset gamesWon and gamesTotal
-    public void resetButtonClicked(View view) {
-        // TODO: Pop-up with warning first
-
+    // ResetWarningDialog-method:
+    @Override
+    public void onResetClick() {
         gamesWon = 0;
         gamesTotal = 0;
 
         updateGamesWonTextView();
+    }
+
+    // ResetWarningDialog-method:
+    @Override
+    public void onCancelResetClick() {
+        // do nothing
+    }
+
+    // Reset values-button clicked: Reset gamesWon and gamesTotal
+    public void resetButtonClicked(View view) {
+        // Pop-up with warning first:
+        String title = getString(R.string.reset_warning_title);
+        String message = getString(R.string.reset_warning_message);
+
+        ResetWarningDialog dialog = ResetWarningDialog.newInstance(title, message);
+        dialog.show(getFragmentManager(), "TAG");
+
+        // Waiting for the user to make a choice
+
+//        gamesWon = 0;
+//        gamesTotal = 0;
+//
+//        updateGamesWonTextView();
     }
 
     public void setWordsFromCategoryChoice() {

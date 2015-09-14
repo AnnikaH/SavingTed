@@ -54,7 +54,7 @@
                 android:id="@+id/reset_button"
                 android:layout_width="@dimen/reset_button_width"
                 android:layout_height="@dimen/reset_button_height"
-                android:text="@string/reset_games_button"
+                android:text="@string/reset_games_title"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
                 android:background="@drawable/menu_button_background"
