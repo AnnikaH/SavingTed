@@ -14,4 +14,8 @@
     <dimen name="text_size">16sp</dimen>
 
     <dimen name="land_buttons_horizontal_margin">42dp</dimen>
+    <dimen name="land_guessed_letters_vertical_margin">120dp</dimen>
+
+    <!-- Rules page -->
+    <dimen name="land_rules_vertical_margin">30dp</dimen>
 </resources>
