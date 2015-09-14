@@ -77,6 +77,20 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         updateGamesWonTextView();
     }
 
+    // TODO: FINISH THIS
+    // Store values
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    // TODO: FINISH THIS
+    // Get values
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,7 +118,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         currentWord = getNextWord();
 
         if (currentWord != null) {
-            // TODO: CREATEKEYBOARD FOR LANDSCAPE: if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT
+            // TODO: CREATEKEYBOARD FOR LANDSCAPE: if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT??
             createGuessWordArea(currentWord);
             createKeyboard();
         } else {
