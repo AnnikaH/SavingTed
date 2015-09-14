@@ -21,6 +21,7 @@
     <string name="image_description">Ted</string>
 
     <string name="change_category_title">Kategori</string>
+    <string name="choose_category">Velg kategori</string>
     <string name="change_difficulty_title">Vanskelighetsgrad</string>
     <string name="change_language_title">Språk</string>
     <string name="reset_games_title">Nullstill</string>
