@@ -21,24 +21,11 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public static class PrefsFragment extends PreferenceFragment {
-//        private PreferenceClickListener callback;
-//
-//        public interface PreferenceClickListener {
-//            void onResetClick();
-//        }
 
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.preferences);
-
-            // TODO: setSummary to the chosen category:
-            // Preference catPref = findPreference("change_category");
-            // catPref.setSummary(...); - stored where?
-
-            // TODO: setSummary to the chosen difficulty:
-            // Preference diffPref = findPreference("change_difficulty");
-            // diffPref.setSummary(...); - stored where?
 
             Preference langPref = findPreference("change_language");
             langPref.setSummary(Locale.getDefault().getDisplayLanguage());
@@ -50,19 +37,6 @@ public class SettingsActivity extends AppCompatActivity {
                     return true;
                 }
             });
-
-//            Preference resetPref = findPreference("reset_games");
-//
-//            resetPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-//                @Override
-//                public boolean onPreferenceClick(Preference preference) {
-                    // TODO: sharedPreferences gamesWon og gamesTotal = 0. Dialog with warning first?
-                    // Intent i = new Intent(getContext(), GameActivity.class);
-//                    i.putExtra("GAMES", "0");
-//                    getContext().startActivity(i);
-//                    return true;
-//                }
-//            });
         }
     }
 
