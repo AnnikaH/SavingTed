@@ -4,7 +4,7 @@
 
     <string-array name="listCategories">
         <item>I butikken</item>
-        <item>Ute</item>
+        <item>Utendørs</item>
         <item>Dyr</item>
         <item>Alle</item>
     </string-array>

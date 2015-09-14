@@ -1,58 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/hangman_liggende"
-    >
+    tools:context=".FrontPageMenuActivity"
+    android:layout_weight="1"
+     >
 
-
-    <!-- Space for word to be guessed: -->
-  <LinearLayout
-        android:id="@+id/guessing_word_layout"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="right"
-        android:paddingRight="@dimen/land_buttons_horizontal_margin"
-        android:paddingTop="@dimen/land_guessed_letters_vertical_margin">
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:layout_weight="0.5">
 
 
-       <!--  A TextView for each letter of the word is created in the java-code-->
-    </LinearLayout>
 
-    <!-- Space for keyboard: -->
+        <!-- Layout for gamesWon and gamesTotal and reset the values -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:background="@android:color/transparent"
+            android:layout_margin="@dimen/activity_horizontal_margin" >
+
+            <TextView
+                android:layout_width="@dimen/reset_button_width"
+                android:layout_height="wrap_content"
+                android:text="@string/games_won"
+                android:gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/games_won_textview"
+                android:layout_width="@dimen/reset_button_width"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_header"
+                android:textStyle="bold"
+                android:gravity="center_horizontal" />
+
+            <Button
+                android:layout_width="@dimen/reset_button_width"
+                android:layout_height="@dimen/reset_button_height"
+                android:text="@string/reset_games_button"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:background="@drawable/menu_button_background"
+                android:layout_marginTop="@dimen/reset_layout_padding"
+                android:textSize="@dimen/text_size_reset_button" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!-- layout_weight 0.5 on the rest: -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_height="match_parent"
+        android:layout_weight="0.5"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+       >
 
+        <!-- Space for word to be guessed: -->
         <LinearLayout
-            android:id="@+id/keyboard_layout_row_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal" >
-            <!-- Buttons for each letter is created in the java-code -->
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/keyboard_layout_row_2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal" >
-            <!-- Buttons for each letter is created in the java-code -->
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/keyboard_layout_row_3"
+            android:id="@+id/guessing_word_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
             android:paddingBottom="@dimen/activity_horizontal_margin" >
-            <!-- Buttons for each letter is created in the java-code -->
+            <!-- A TextView for each letter of the word is created in the java-code -->
         </LinearLayout>
 
-    </LinearLayout> <!-- End of layout for keyboard -->
+        <!-- Space for keyboard: -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
+            <LinearLayout
+                android:id="@+id/keyboard_layout_row_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal" >
+                <!-- Buttons for each letter is created in the java-code -->
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/keyboard_layout_row_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal" >
+                <!-- Buttons for each letter is created in the java-code -->
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/keyboard_layout_row_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_horizontal"
+                android:paddingBottom="@dimen/activity_horizontal_margin" >
+                <!-- Buttons for each letter is created in the java-code -->
+            </LinearLayout>
 
+        </LinearLayout> <!-- End of layout for keyboard -->
+
+    </LinearLayout>
 </LinearLayout>
