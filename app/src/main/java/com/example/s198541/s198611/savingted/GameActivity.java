@@ -82,6 +82,23 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+
+        // Storing the private attributes:
+        outState.putStringArray("WORDS", words);
+        outState.putInt("WORD_COUNTER", wordCounter);
+        outState.putString("CURRENT_WORD", currentWord);
+        outState.putStringArray("ALPHABET_LETTERS", alphabetLetters);
+        outState.putInt("NUM_LETTERS_GUESSED", numLettersGuessed);
+        outState.putInt("IMAGE_COUNTER", imageCounter);
+        outState.putInt("GAMES_WON", gamesWon);
+        outState.putInt("GAMES_TOTAL", gamesTotal);
+        outState.putInt("CHOSEN_CATEGORY_INDEX", chosenCategoryIndex);
+
+        /* TODO: Hva man må vite:
+            Hvilke bokstaver som er funnet i ordet man gjetter på
+            Hvordan keyboardet ser ut (bokstaver røde el. grønne el. hvite)
+            Hvilket bilde man har kommet til (imageCounter nok?)
+        */
     }
 
     // TODO: FINISH THIS
@@ -89,6 +106,24 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+
+        // TODO: MÅ UNNGÅ AT DIALOGEN KOMMER OPP SOM OPPRETTES I ONCREATE (velge kategori)
+
+        // Getting the stored private attributes:
+        words = savedInstanceState.getStringArray("WORDS");
+        wordCounter = savedInstanceState.getInt("WORD_COUNTER");
+        currentWord = savedInstanceState.getString("CURRENT_WORD");
+        alphabetLetters = savedInstanceState.getStringArray("ALPHABET_LETTERS");
+        numLettersGuessed = savedInstanceState.getInt("NUM_LETTERS_GUESSED");
+        imageCounter = savedInstanceState.getInt("IMAGE_COUNTER");
+        gamesWon = savedInstanceState.getInt("GAMES_WON");
+        gamesTotal = savedInstanceState.getInt("GAMES_TOTAL");
+        chosenCategoryIndex = savedInstanceState.getInt("CHOSEN_CATEGORY_INDEX");
+
+        /* TODO: Hva man må vite/få info om:
+            Hvilke bokstaver som er funnet i ordet man gjetter på
+            Hvordan keyboardet ser ut (bokstaver røde el. grønne el. hvite)
+        */
     }
 
     @Override
