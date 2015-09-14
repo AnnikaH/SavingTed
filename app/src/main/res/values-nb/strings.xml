@@ -25,7 +25,7 @@
     <string name="change_language_title">Språk</string>
     <string name="reset_games_title">Nullstill</string>
     <string name="reset_games">Nullstill antall spilte spill og antall spill vunnet</string>
-    <string name="reset_games_button">Nullstill verdier</string>
+    <string name="reset_games_button">Nullstill</string>
 
     <string name="games_won">Vunnet/Total:</string>
 

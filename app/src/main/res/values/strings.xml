@@ -30,7 +30,7 @@
     <string name="change_language_title">Language</string>
     <string name="reset_games_title">Reset</string>
     <string name="reset_games">Reset number of games played and games won</string>
-    <string name="reset_games_button">Reset values</string>
+    <string name="reset_games_button">Reset</string>
 
     <string name="games_won">Won/Total:</string>
 
