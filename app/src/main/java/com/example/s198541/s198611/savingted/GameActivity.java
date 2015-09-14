@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity implements EndGameDialog.DialogClickListener,
         EndSessionDialog.DialogClickListener, NewGameDialog.DialogClickListener {
 
+    // TODO: Many of these values can be elements in dimens.xml and we can get to them via R.dimen.name ?
     private static final int GUESS_WORD_TEXT_SIZE = 20;
     private static final int GUESS_WORD_PADDING = 8;
     private static final int NEW_LINE_KEYBOARD_FIRST = 10;
@@ -29,6 +31,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     private static final int KEYBOARD_MARGIN = 2;
     private static final int KEYBOARD_WIDTH = 38;
     private static final int KEYBOARD_HEIGHT = 55;
+
     private static final int[] IMAGE_IDS = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
             R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6, R.drawable.hangman_siste};
 
@@ -85,7 +88,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         String[] categories = res.getStringArray(R.array.listCategories);
 
         // Pop-up-dialogs where the player chooses category:
-        String catTitle = "Choose a category";
+        String catTitle = getString(R.string.choose_category);
         NewGameDialog catDialog = NewGameDialog.newInstance(catTitle, categories);
         catDialog.show(getFragmentManager(), "TAG");
         // Waiting for the player to make a choice
@@ -111,6 +114,43 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     @Override
     public void onCancelClick() {
         finish();
+    }
+
+    // EndGameDialog-method:
+    @Override
+    public void onOkClick() {
+        currentWord = getNextWord();
+
+        if (currentWord != null) {
+            resetValues();
+            createGuessWordArea(currentWord);
+        } else {
+            endOfSessionDialog();
+        }
+    }
+
+    // EndSessionDialog-method:
+    @Override
+    public void onNewGameClick() {
+        Intent i = new Intent(this, GameActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    // EndSessionDialog-method:
+    @Override
+    public void onQuitGameClick() {
+        finish();
+    }
+
+    // Reset values-button clicked: Reset gamesWon and gamesTotal
+    public void resetButtonClicked(View view) {
+        // TODO: Pop-up with warning first
+
+        gamesWon = 0;
+        gamesTotal = 0;
+
+        updateGamesWonTextView();
     }
 
     public void setWordsFromCategoryChoice() {
@@ -143,33 +183,6 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         List<String> shuffledList = Arrays.asList(words);
         Collections.shuffle(shuffledList);
         words = shuffledList.toArray(new String[shuffledList.size()]);
-    }
-
-    // EndGameDialog-method:
-    @Override
-    public void onOkClick() {
-        currentWord = getNextWord();
-
-        if (currentWord != null) {
-            resetValues();
-            createGuessWordArea(currentWord);
-        } else {
-            endOfSessionDialog();
-        }
-    }
-
-    // EndSessionDialog-method:
-    @Override
-    public void onNewGameClick() {
-        Intent i = new Intent(this, GameActivity.class);
-        startActivity(i);
-        finish();
-    }
-
-    // EndSessionDialog-method:
-    @Override
-    public void onQuitGameClick() {
-        finish();
     }
 
     public String getNextWord() {

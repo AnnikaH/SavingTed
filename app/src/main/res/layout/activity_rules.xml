@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grassGreen"
-    tools:context=".FrontPageMenuActivity"
+    tools:context=".RulesActivity"
     android:weightSum="1" >
 
     <!-- layout_weight 0.5 on the ImageView: -->
