@@ -1,21 +1,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="true"
     android:background="@drawable/hangman_liggende"
     tools:context=".FrontPageMenuActivity"
-    android:gravity="right"
+    android:gravity="end"
     android:weightSum="1">
-
-
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingRight="@dimen/land_buttons_horizontal_margin"
-        android:gravity="right">
+        android:paddingEnd="@dimen/land_buttons_horizontal_margin"
+        android:gravity="end">
 
         <Button
             android:layout_width="@dimen/menu_button_width"
