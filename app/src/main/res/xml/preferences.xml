@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-
-    <!-- TODO: Set summary (android:summary="") to be the chosen/stored choice for this: -->
-    <!-- TODO: Set android:defaultValue="" to All -->
-    <!--<ListPreference android:title="@string/change_category_title"-->
-        <!--android:entries="@array/listCategories"-->
-        <!--android:entryValues="@array/listCategories"-->
-        <!--android:key="change_category" />-->
-    <!-- TODO: And make sure this is registered and handled in GameActivity (choose words from the right list of words) -->
-
-    <!-- TODO: Set summary (android:summary="") to be the chosen/stored choice for this: -->
-    <!-- TODO: Set android:defaultValue="" to All -->
-    <!--<ListPreference android:title="@string/change_difficulty_title"-->
-        <!--android:entries="@array/listDifficulties"-->
-        <!--android:entryValues="@array/listDifficulties"-->
-        <!--android:key="change_difficulty" />-->
-    <!-- TODO: And make sure this is registered and handled in GameActivity (choose words from the right list of words) -->
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <Preference android:title="@string/change_language_title"
         android:key="change_language" />
-
-    <!--<Preference android:title="@string/reset_games_title"-->
-        <!--android:summary="@string/reset_games"-->
-        <!--android:key="reset_games" />-->
 
 </PreferenceScreen>

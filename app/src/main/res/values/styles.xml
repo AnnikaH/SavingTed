@@ -3,12 +3,10 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-
     </style>
 
     <style name="preferencesStyle" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowBackground">@color/grassGreen</item>
-
     </style>
 
 </resources>
