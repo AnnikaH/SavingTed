@@ -85,7 +85,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     }
 
     // TODO: FINISH THIS
-    // Get values
+    // Get stored values
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
