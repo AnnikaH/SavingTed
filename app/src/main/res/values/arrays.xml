@@ -38,22 +38,22 @@
     <!-- End Category-section -->
 
     <!-- USED EARLIER: -->
-    <string-array name="listWords">
-        <item>ACROBAT</item>
-        <item>QUIZ</item>
-        <item>ORANGE</item>
-        <item>MONKEY</item>
-        <item>DELICIOUS</item>
-        <item>MAGAZINE</item>
-        <item>SCIENCE</item>
-        <item>CRY</item>
-        <item>PIG</item>
-        <item>WALTZ</item>
-        <item>CROWN</item>
-        <item>CABBAGE</item>
-        <item>AIRPLANE</item>
-        <item>LAMP</item>
-    </string-array>
+    <!--<string-array name="listWords">-->
+        <!--<item>ACROBAT</item>-->
+        <!--<item>QUIZ</item>-->
+        <!--<item>ORANGE</item>-->
+        <!--<item>MONKEY</item>-->
+        <!--<item>DELICIOUS</item>-->
+        <!--<item>MAGAZINE</item>-->
+        <!--<item>SCIENCE</item>-->
+        <!--<item>CRY</item>-->
+        <!--<item>PIG</item>-->
+        <!--<item>WALTZ</item>-->
+        <!--<item>CROWN</item>-->
+        <!--<item>CABBAGE</item>-->
+        <!--<item>AIRPLANE</item>-->
+        <!--<item>LAMP</item>-->
+    <!--</string-array>-->
 
     <string-array name="listAlphabet">
         <item>A</item>
