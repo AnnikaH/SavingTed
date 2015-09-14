@@ -30,7 +30,8 @@
         <activity
             android:name=".SettingsActivity"
             android:parentActivityName=".FrontPageMenuActivity"
-            android:label="@string/settings" >
+            android:label="@string/settings"
+            android:theme="@style/preferencesStyle">
         </activity>
     </application>
 
