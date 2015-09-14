@@ -3,6 +3,7 @@ package com.example.s198541.s198611.savingted;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -103,6 +104,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         currentWord = getNextWord();
 
         if (currentWord != null) {
+            // TODO: CREATEKEYBOARD FOR LANDSCAPE: if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT
             createGuessWordArea(currentWord);
             createKeyboard();
         } else {
@@ -122,6 +124,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         currentWord = getNextWord();
 
         if (currentWord != null) {
+            // TODO: CREATEKEYBOARD FOR LANDSCAPE: if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT??
             resetValues();
             createGuessWordArea(currentWord);
         } else {
@@ -168,16 +171,12 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         dialog.show(getFragmentManager(), "TAG");
 
         // Waiting for the user to make a choice
-
-//        gamesWon = 0;
-//        gamesTotal = 0;
-//
-//        updateGamesWonTextView();
     }
 
+    // The user has chosen a category from the pop-up dialog NewGameDialog
     public void setWordsFromCategoryChoice() {
         // reading words from the right category from xml-file (arrays.xml):
-        switch(chosenCategoryIndex) {
+        switch (chosenCategoryIndex) {
             case 0:
                 words = res.getStringArray(R.array.listWordsAtTheStore);
                 break;
@@ -236,6 +235,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         }
     }
 
+    // TODO: CREATEKEYBOARD-METHOD FOR BOTH PORTRAIT AND LANDSCAPE? OR: JUST CHANGE THE TESTS
     public void createKeyboard() {
         LinearLayout layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_1);
 
@@ -273,9 +273,15 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
                         // change color for the letter to red
                         b.setTextColor(Color.RED);
 
-                        // show next image in the ImageView main_image:
-                        ImageView imageView = (ImageView) findViewById(R.id.main_image);
-                        imageView.setBackgroundResource(IMAGE_IDS[imageCounter++]);
+                        if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT
+                        {
+                            // show next image in the ImageView main_image:
+                            ImageView imageView = (ImageView) findViewById(R.id.main_image);
+                            imageView.setBackgroundResource(IMAGE_IDS[imageCounter++]);
+                        } else {    // then it is ORIENTATION_LANDSCAPE (2)
+                            LinearLayout layout = (LinearLayout) findViewById(R.id.image_layout_land);
+                            layout.setBackgroundResource(IMAGE_IDS[imageCounter++]);
+                        }
 
                         // If this was the last image: weren't able to guess the word
                         // If now, after imageCounter++, imageCounter is the same as the length of
@@ -349,8 +355,16 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     public void resetValues() {
         numLettersGuessed = 0;
         imageCounter = 0;
-        ImageView imageView = (ImageView) findViewById(R.id.main_image);
-        imageView.setBackgroundResource(R.drawable.hangman_forste);
+
+        if(res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT)
+        {
+            ImageView imageView = (ImageView) findViewById(R.id.main_image);
+            imageView.setBackgroundResource(R.drawable.hangman_forste);
+        } else { // then it is ORIENTATION_LANDSCAPE (2)
+            LinearLayout layout = (LinearLayout) findViewById(R.id.image_layout_land);
+            layout.setBackgroundResource(R.drawable.hangman_forste);
+        }
+
         clearKeyboard();
         createKeyboard();
     }
