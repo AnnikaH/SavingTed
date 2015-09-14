@@ -69,6 +69,8 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
             gamesWon = 0;
             gamesTotal = 0;
         }
+
+        updateGamesWonTextView();
     }
 
     @Override
@@ -175,6 +177,11 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
             return null;
 
         return words[wordCounter++];
+    }
+
+    public void updateGamesWonTextView() {
+        TextView gamesWonTextView = (TextView) findViewById(R.id.games_won_textview);
+        gamesWonTextView.setText(gamesWon + "/" + gamesTotal);
     }
 
     public void createGuessWordArea(String chosenWord) {
@@ -293,6 +300,8 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         }
 
         gamesTotal++;
+
+        updateGamesWonTextView();
 
         // Creating pop-up/dialog with title and message that has an OK-button:
         EndGameDialog dialog = EndGameDialog.newInstance(title, message);

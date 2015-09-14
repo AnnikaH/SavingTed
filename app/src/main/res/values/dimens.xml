@@ -4,11 +4,11 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- Custom: -->
-    <dimen name="menu_button_height">34dp</dimen>
     <dimen name="menu_button_width">190dp</dimen>
+    <dimen name="menu_button_height">34dp</dimen>
 
-    <dimen name="keyboard_button_height">20dp</dimen>
     <dimen name="keyboard_button_width">20dp</dimen>
+    <dimen name="keyboard_button_height">20dp</dimen>
 
     <dimen name="text_size_header">25sp</dimen>
     <dimen name="text_size">16sp</dimen>
@@ -18,4 +18,9 @@
 
     <!-- Rules page -->
     <dimen name="land_rules_vertical_margin">30dp</dimen>
+
+    <dimen name="reset_button_width">95dp</dimen>
+    <dimen name="reset_button_height">28dp</dimen>
+    <dimen name="reset_layout_padding">5dp</dimen>
+    <dimen name="text_size_reset_button">14sp</dimen>
 </resources>
