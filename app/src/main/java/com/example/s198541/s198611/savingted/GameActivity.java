@@ -273,12 +273,14 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
                         // change color for the letter to red
                         b.setTextColor(Color.RED);
 
+                        // show next image:
                         if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT
                         {
                             // show next image in the ImageView main_image:
                             ImageView imageView = (ImageView) findViewById(R.id.main_image);
                             imageView.setBackgroundResource(IMAGE_IDS[imageCounter++]);
                         } else {    // then it is ORIENTATION_LANDSCAPE (2)
+                            // show next image in the LinearLayout image_layout_land:
                             LinearLayout layout = (LinearLayout) findViewById(R.id.image_layout_land);
                             layout.setBackgroundResource(IMAGE_IDS[imageCounter++]);
                         }
@@ -356,6 +358,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         numLettersGuessed = 0;
         imageCounter = 0;
 
+        // reset image:
         if(res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT)
         {
             ImageView imageView = (ImageView) findViewById(R.id.main_image);
