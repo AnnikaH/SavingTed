@@ -13,5 +13,5 @@
     <dimen name="text_size_header">25sp</dimen>
     <dimen name="text_size">16sp</dimen>
 
-    <dimen name="land_buttons_horizontal_margin">20dp</dimen>
+    <dimen name="land_buttons_horizontal_margin">42dp</dimen>
 </resources>
