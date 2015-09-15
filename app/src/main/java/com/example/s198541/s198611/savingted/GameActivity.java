@@ -130,7 +130,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     public void showLastImage() {
         if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT
         {
-            // show next image in the ImageView main_image:
+            // show the image in the ImageView main_image:
             ImageView imageView = (ImageView) findViewById(R.id.main_image);
 
             if(imageCounter == 0) { // the array IMAGE_IDS, that the imageCounter counts on, does not contain the first image
@@ -139,7 +139,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
                 imageView.setBackgroundResource(IMAGE_IDS[imageCounter - 1]);
             }
         } else {    // then it is ORIENTATION_LANDSCAPE (2)
-            // show next image in the LinearLayout image_layout_land:
+            // show the image in the LinearLayout image_layout_land:
             LinearLayout layout = (LinearLayout) findViewById(R.id.image_layout_land);
 
             if(imageCounter == 0) { // the array IMAGE_IDS, that the imageCounter counts on, does not contain the first image
