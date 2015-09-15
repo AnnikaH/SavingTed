@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,8 +24,6 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity implements EndGameDialog.DialogClickListener,
         EndSessionDialog.DialogClickListener, NewGameDialog.DialogClickListener, ResetWarningDialog.DialogClickListener {
 
-    // The program counts only one so
-    // TODO:
     // TODO: Many of these values can be elements in dimens.xml and we can get to them via R.dimen.name ?
     private static final int GUESS_WORD_TEXT_SIZE = 20;
     private static final int GUESS_WORD_PADDING = 8;
@@ -38,9 +37,8 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     private static final int KEYBOARD_WIDTH_LAND = 44;
     private static final int KEYBOARD_HEIGHT_LAND = 33;
 
-    private static final int[] IMAGE_IDS = {R.drawable.hangman_1, R.drawable.hangman_2,
-            R.drawable.hangman_3, R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6,
-            R.drawable.hangman_siste};
+    private static final int[] IMAGE_IDS = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
+            R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6, R.drawable.hangman_siste};
 
     private Resources res;
     private String[] words;
@@ -83,7 +81,6 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         updateGamesWonTextView();
     }
 
-    // TODO:
     // TODO: FINISH THIS
     // Store values
     @Override
@@ -120,11 +117,10 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         super.onSaveInstanceState(outState);
     }
 
-    // TODO:
     // TODO: FINISH THIS
     // Get stored values
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
         // Getting the stored private attributes:
@@ -417,7 +413,6 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         }
     }
 
-    // TODO:
     // TODO: clearKeyboard-method for both landscape and portrait - or if-test inside this
     public void clearKeyboard() {
         LinearLayout layoutRow1 = (LinearLayout) findViewById(R.id.keyboard_layout_row_1);
