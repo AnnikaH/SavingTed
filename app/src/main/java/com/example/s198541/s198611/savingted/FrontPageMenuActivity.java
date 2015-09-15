@@ -13,10 +13,6 @@ public class FrontPageMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_front_page_menu);
-
-//      setContentView(new MyGIFView(getApplicationContext()));
-//      getApplicationContext() possibly not working: MyApp.getContext();
-//      MyApp skal tilsvare manifestfilen sin application: android:name="MyApp"
     }
 
     public void newGameButtonClicked(View view) {
@@ -37,34 +33,6 @@ public class FrontPageMenuActivity extends AppCompatActivity {
     public void quitButtonClicked(View view) {
         finish();
     }
-
-//    private class MyGIFView extends View {
-//        Movie movie;
-//        InputStream is = null;
-//        long moviestart;
-//
-//        public MyGIFView(Context context) {
-//            super(context);
-//            is = context.getResources().openRawResource(R.raw.hangman_background_animation);
-//            movie = Movie.decodeStream(is);
-//        }
-//
-//        @Override
-//        protected void onDraw(Canvas canvas) {
-//            canvas.drawColor(Color.WHITE);
-//            super.onDraw(canvas);
-//            long now = android.os.SystemClock.uptimeMillis();
-//
-//            if(moviestart == 0) {
-//                moviestart = now;
-//            }
-//
-//            int relTime = (int) ((now - moviestart) % movie.duration());
-//            movie.setTime(2000);
-//            movie.draw(canvas, this.getWidth() / 2 - 20, this.getHeight() / 2 - 40);
-//            this.invalidate();
-//        }
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
