@@ -23,6 +23,8 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity implements EndGameDialog.DialogClickListener,
         EndSessionDialog.DialogClickListener, NewGameDialog.DialogClickListener, ResetWarningDialog.DialogClickListener {
 
+    // The program counts only one so
+    // TODO:
     // TODO: Many of these values can be elements in dimens.xml and we can get to them via R.dimen.name ?
     private static final int GUESS_WORD_TEXT_SIZE = 20;
     private static final int GUESS_WORD_PADDING = 8;
@@ -81,6 +83,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         updateGamesWonTextView();
     }
 
+    // TODO:
     // TODO: FINISH THIS
     // Store values
     @Override
@@ -107,6 +110,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 //
 //        outState.putStringArray("", );
 
+        // TODO:
         /* TODO: Hva man må vite:
             Hvilke bokstaver som er funnet i ordet man gjetter på
             Hvordan keyboardet ser ut (bokstaver røde el. grønne el. hvite)
@@ -116,6 +120,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         super.onSaveInstanceState(outState);
     }
 
+    // TODO:
     // TODO: FINISH THIS
     // Get stored values
     @Override
@@ -138,6 +143,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         createGuessWordArea(currentWord);
         createKeyboard();
 
+        // TODO:
         /* TODO: Hva man må vite/få info om:
             Hvilke bokstaver som er funnet i ordet man gjetter på
             Hvordan keyboardet ser ut (bokstaver røde el. grønne el. hvite)
@@ -411,6 +417,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         }
     }
 
+    // TODO:
     // TODO: clearKeyboard-method for both landscape and portrait - or if-test inside this
     public void clearKeyboard() {
         LinearLayout layoutRow1 = (LinearLayout) findViewById(R.id.keyboard_layout_row_1);
