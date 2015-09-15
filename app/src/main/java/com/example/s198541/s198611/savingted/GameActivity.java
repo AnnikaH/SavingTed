@@ -34,6 +34,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     private static final int KEYBOARD_HEIGHT = 55;
     private static final int KEYBOARD_WIDTH_LAND = 44;
     private static final int KEYBOARD_HEIGHT_LAND = 33;
+    private static final int BUTTON_ID_START = 50;
 
     private static final int[] IMAGE_IDS = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
             R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6, R.drawable.hangman_siste};
@@ -95,15 +96,15 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         outState.putInt("CHOSEN_CATEGORY_INDEX", chosenCategoryIndex);
 
         // Save all the buttons for the keyboard and the states they are in:
-//        String[] buttonStateArray = new String[alphabetLetters.length];
-//
-//        for(int i = 0; i < alphabetLetters.length; i++) {
-//            Button keyboardButton = (Button) findViewById(i + 50);  // find each button
-//
-//            buttonStateArray[i] = ;
-//        }
-//
-//        outState.putStringArray("", );
+        int[] buttonColorArray = new int[alphabetLetters.length];
+
+        for (int i = 0; i < alphabetLetters.length; i++) {
+            Button keyboardButton = (Button) findViewById(i + BUTTON_ID_START);  // find each button
+            int color = keyboardButton.getCurrentTextColor();
+            buttonColorArray[i] = color;
+        }
+
+        outState.putIntArray("BUTTON_COLORS", buttonColorArray);
 
         // TODO:
         /* TODO: Hva man må vite:
@@ -137,10 +138,22 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         createGuessWordArea(currentWord);
         createKeyboard();
 
+        int[] buttonColorArray = savedInstanceState.getIntArray("BUTTON_COLORS");
+
+        for (int i = 0; i < buttonColorArray.length; i++) {
+            Button button = (Button) findViewById(i + BUTTON_ID_START);
+
+            int color = buttonColorArray[i];
+
+            if(color == Color.GREEN || color == Color.RED) {    // then the button has been clicked before
+                button.setTextColor(color);
+                button.setEnabled(false);
+            }
+        }
+
         // TODO:
         /* TODO: Hva man må vite/få info om:
             Hvilke bokstaver som er funnet i ordet man gjetter på
-            Hvordan keyboardet ser ut (bokstaver røde el. grønne el. hvite)
         */
     }
 
@@ -346,7 +359,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
             // Creating a button (one button for each letter) for the keyboard and adding it to
             // the specified layout:
             Button buttonLetter = new Button(this);
-            buttonLetter.setId(i + 50);
+            buttonLetter.setId(i + BUTTON_ID_START);
             buttonLetter.setTextColor(Color.WHITE);
             buttonLetter.setTextSize(KEYBOARD_TEXT_SIZE);
             buttonLetter.setText(alphabetLetters[i]);
@@ -384,7 +397,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
             });
 
             // The keyboard-buttons in portrait and landscape are going to have different dimensions:
-            if(res.getConfiguration().orientation == 1) { // then it is ORIENTATION_PORTRAIT
+            if (res.getConfiguration().orientation == 1) { // then it is ORIENTATION_PORTRAIT
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(KEYBOARD_WIDTH, KEYBOARD_HEIGHT);
                 layoutParams.setMargins(KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN);
                 buttonLetter.setLayoutParams(layoutParams);
