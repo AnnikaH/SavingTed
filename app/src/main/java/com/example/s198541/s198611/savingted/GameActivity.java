@@ -33,8 +33,9 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     private static final int KEYBOARD_WIDTH = 38;
     private static final int KEYBOARD_HEIGHT = 55;
 
-    private static final int[] IMAGE_IDS = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
-            R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6, R.drawable.hangman_siste};
+    private static final int[] IMAGE_IDS = {R.drawable.hangman_1, R.drawable.hangman_2,
+            R.drawable.hangman_3, R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6,
+            R.drawable.hangman_siste};
 
     private Resources res;
     private String[] words;
@@ -81,13 +82,11 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     // Store values
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
         // Storing the private attributes:
         outState.putStringArray("WORDS", words);
         outState.putInt("WORD_COUNTER", wordCounter);
         outState.putString("CURRENT_WORD", currentWord);
-        outState.putStringArray("ALPHABET_LETTERS", alphabetLetters);
+        //outState.putStringArray("ALPHABET_LETTERS", alphabetLetters);
         outState.putInt("NUM_LETTERS_GUESSED", numLettersGuessed);
         outState.putInt("IMAGE_COUNTER", imageCounter);
         outState.putInt("GAMES_WON", gamesWon);
@@ -99,6 +98,8 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
             Hvordan keyboardet ser ut (bokstaver røde el. grønne el. hvite)
             Hvilket bilde man har kommet til (imageCounter nok?)
         */
+
+        super.onSaveInstanceState(outState);
     }
 
     // TODO: FINISH THIS
@@ -107,18 +108,18 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
 
-        // TODO: MÅ UNNGÅ AT DIALOGEN KOMMER OPP SOM OPPRETTES I ONCREATE (velge kategori)
-
         // Getting the stored private attributes:
         words = savedInstanceState.getStringArray("WORDS");
         wordCounter = savedInstanceState.getInt("WORD_COUNTER");
         currentWord = savedInstanceState.getString("CURRENT_WORD");
-        alphabetLetters = savedInstanceState.getStringArray("ALPHABET_LETTERS");
+        //alphabetLetters = savedInstanceState.getStringArray("ALPHABET_LETTERS");
         numLettersGuessed = savedInstanceState.getInt("NUM_LETTERS_GUESSED");
         imageCounter = savedInstanceState.getInt("IMAGE_COUNTER");
         gamesWon = savedInstanceState.getInt("GAMES_WON");
         gamesTotal = savedInstanceState.getInt("GAMES_TOTAL");
         chosenCategoryIndex = savedInstanceState.getInt("CHOSEN_CATEGORY_INDEX");
+
+        showLastImage();
 
         /* TODO: Hva man må vite/få info om:
             Hvilke bokstaver som er funnet i ordet man gjetter på
@@ -126,22 +127,50 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         */
     }
 
+    public void showLastImage() {
+        if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT
+        {
+            // show next image in the ImageView main_image:
+            ImageView imageView = (ImageView) findViewById(R.id.main_image);
+
+            if(imageCounter == 0) { // the array IMAGE_IDS, that the imageCounter counts on, does not contain the first image
+                imageView.setBackgroundResource(R.drawable.hangman_forste);
+            } else {
+                imageView.setBackgroundResource(IMAGE_IDS[imageCounter - 1]);
+            }
+        } else {    // then it is ORIENTATION_LANDSCAPE (2)
+            // show next image in the LinearLayout image_layout_land:
+            LinearLayout layout = (LinearLayout) findViewById(R.id.image_layout_land);
+
+            if(imageCounter == 0) { // the array IMAGE_IDS, that the imageCounter counts on, does not contain the first image
+                layout.setBackgroundResource(R.drawable.hangman_forste);
+            } else {
+                layout.setBackgroundResource(IMAGE_IDS[imageCounter - 1]);
+            }
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_game);
 
         res = getResources();
 
         alphabetLetters = res.getStringArray(R.array.listAlphabet);
 
-        String[] categories = res.getStringArray(R.array.listCategories);
+        if (savedInstanceState == null) {
+            // Then: create pop-up to choose category:
 
-        // Pop-up-dialogs where the player chooses category:
-        String catTitle = getString(R.string.choose_category);
-        NewGameDialog catDialog = NewGameDialog.newInstance(catTitle, categories);
-        catDialog.show(getFragmentManager(), "TAG");
-        // Waiting for the player to make a choice
+            String[] categories = res.getStringArray(R.array.listCategories);
+
+            // Pop-up-dialogs where the player chooses category:
+            String catTitle = getString(R.string.choose_category);
+            NewGameDialog catDialog = NewGameDialog.newInstance(catTitle, categories);
+            catDialog.show(getFragmentManager(), "TAG");
+            // Waiting for the player to make a choice
+        }
     }
 
     // NewGameDialog-method:
@@ -298,6 +327,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
             // Creating a button (one button for each letter) for the keyboard and adding it to
             // the specified layout:
             Button buttonLetter = new Button(this);
+            buttonLetter.setId(i + 50);
             buttonLetter.setTextColor(Color.WHITE);
             buttonLetter.setTextSize(KEYBOARD_TEXT_SIZE);
             buttonLetter.setText(alphabetLetters[i]);
@@ -322,17 +352,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
                         // change color for the letter to red
                         b.setTextColor(Color.RED);
 
-                        // show next image:
-                        if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT
-                        {
-                            // show next image in the ImageView main_image:
-                            ImageView imageView = (ImageView) findViewById(R.id.main_image);
-                            imageView.setBackgroundResource(IMAGE_IDS[imageCounter++]);
-                        } else {    // then it is ORIENTATION_LANDSCAPE (2)
-                            // show next image in the LinearLayout image_layout_land:
-                            LinearLayout layout = (LinearLayout) findViewById(R.id.image_layout_land);
-                            layout.setBackgroundResource(IMAGE_IDS[imageCounter++]);
-                        }
+                        showNextImage();
 
                         // If this was the last image: weren't able to guess the word
                         // If now, after imageCounter++, imageCounter is the same as the length of
@@ -352,6 +372,20 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         }
     }
 
+    public void showNextImage() {
+        if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT
+        {
+            // show next image in the ImageView main_image:
+            ImageView imageView = (ImageView) findViewById(R.id.main_image);
+            imageView.setBackgroundResource(IMAGE_IDS[imageCounter++]);
+        } else {    // then it is ORIENTATION_LANDSCAPE (2)
+            // show next image in the LinearLayout image_layout_land:
+            LinearLayout layout = (LinearLayout) findViewById(R.id.image_layout_land);
+            layout.setBackgroundResource(IMAGE_IDS[imageCounter++]);
+        }
+    }
+
+    // TODO: clearKeyboard-method for both landscape and portrait - or if-test inside this
     public void clearKeyboard() {
         LinearLayout layoutRow1 = (LinearLayout) findViewById(R.id.keyboard_layout_row_1);
         LinearLayout layoutRow2 = (LinearLayout) findViewById(R.id.keyboard_layout_row_2);
@@ -408,7 +442,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         imageCounter = 0;
 
         // reset image:
-        if(res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT)
+        if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT)
         {
             ImageView imageView = (ImageView) findViewById(R.id.main_image);
             imageView.setBackgroundResource(R.drawable.hangman_forste);
