@@ -28,10 +28,13 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     private static final int GUESS_WORD_PADDING = 8;
     private static final int NEW_LINE_KEYBOARD_FIRST = 10;
     private static final int NEW_LINE_KEYBOARD_SECOND = 20;
+    private static final int NEW_LINE_KEYBOARD_FIRST_LAND = 15;
     private static final int KEYBOARD_TEXT_SIZE = 16;
     private static final int KEYBOARD_MARGIN = 2;
     private static final int KEYBOARD_WIDTH = 38;
     private static final int KEYBOARD_HEIGHT = 55;
+    private static final int KEYBOARD_WIDTH_LAND = 44;
+    private static final int KEYBOARD_HEIGHT_LAND = 33;
 
     private static final int[] IMAGE_IDS = {R.drawable.hangman_1, R.drawable.hangman_2,
             R.drawable.hangman_3, R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6,
@@ -86,12 +89,23 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         outState.putStringArray("WORDS", words);
         outState.putInt("WORD_COUNTER", wordCounter);
         outState.putString("CURRENT_WORD", currentWord);
-        //outState.putStringArray("ALPHABET_LETTERS", alphabetLetters);
+        //Is set in onCreate so not necessary: outState.putStringArray("ALPHABET_LETTERS", alphabetLetters);
         outState.putInt("NUM_LETTERS_GUESSED", numLettersGuessed);
         outState.putInt("IMAGE_COUNTER", imageCounter);
         outState.putInt("GAMES_WON", gamesWon);
         outState.putInt("GAMES_TOTAL", gamesTotal);
         outState.putInt("CHOSEN_CATEGORY_INDEX", chosenCategoryIndex);
+
+        // Save all the buttons for the keyboard and the states they are in:
+//        String[] buttonStateArray = new String[alphabetLetters.length];
+//
+//        for(int i = 0; i < alphabetLetters.length; i++) {
+//            Button keyboardButton = (Button) findViewById(i + 50);  // find each button
+//
+//            buttonStateArray[i] = ;
+//        }
+//
+//        outState.putStringArray("", );
 
         /* TODO: Hva man må vite:
             Hvilke bokstaver som er funnet i ordet man gjetter på
@@ -112,7 +126,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         words = savedInstanceState.getStringArray("WORDS");
         wordCounter = savedInstanceState.getInt("WORD_COUNTER");
         currentWord = savedInstanceState.getString("CURRENT_WORD");
-        //alphabetLetters = savedInstanceState.getStringArray("ALPHABET_LETTERS");
+        //Is set in onCreate so not necessary: alphabetLetters = savedInstanceState.getStringArray("ALPHABET_LETTERS");
         numLettersGuessed = savedInstanceState.getInt("NUM_LETTERS_GUESSED");
         imageCounter = savedInstanceState.getInt("IMAGE_COUNTER");
         gamesWon = savedInstanceState.getInt("GAMES_WON");
@@ -121,19 +135,23 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 
         showLastImage();
 
+        createGuessWordArea(currentWord);
+        createKeyboard();
+
         /* TODO: Hva man må vite/få info om:
             Hvilke bokstaver som er funnet i ordet man gjetter på
             Hvordan keyboardet ser ut (bokstaver røde el. grønne el. hvite)
         */
     }
 
+    // Called from onRestoreInstanceState()
     public void showLastImage() {
         if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT
         {
             // show the image in the ImageView main_image:
             ImageView imageView = (ImageView) findViewById(R.id.main_image);
 
-            if(imageCounter == 0) { // the array IMAGE_IDS, that the imageCounter counts on, does not contain the first image
+            if (imageCounter == 0) { // the array IMAGE_IDS, that the imageCounter counts on, does not contain the first image
                 imageView.setBackgroundResource(R.drawable.hangman_forste);
             } else {
                 imageView.setBackgroundResource(IMAGE_IDS[imageCounter - 1]);
@@ -142,7 +160,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
             // show the image in the LinearLayout image_layout_land:
             LinearLayout layout = (LinearLayout) findViewById(R.id.image_layout_land);
 
-            if(imageCounter == 0) { // the array IMAGE_IDS, that the imageCounter counts on, does not contain the first image
+            if (imageCounter == 0) { // the array IMAGE_IDS, that the imageCounter counts on, does not contain the first image
                 layout.setBackgroundResource(R.drawable.hangman_forste);
             } else {
                 layout.setBackgroundResource(IMAGE_IDS[imageCounter - 1]);
@@ -160,9 +178,8 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 
         alphabetLetters = res.getStringArray(R.array.listAlphabet);
 
-        if (savedInstanceState == null) {
-            // Then: create pop-up to choose category:
-
+        // If there is no saved instance yet:
+        if (savedInstanceState == null) { // Then: create pop-up to choose category:
             String[] categories = res.getStringArray(R.array.listCategories);
 
             // Pop-up-dialogs where the player chooses category:
@@ -182,7 +199,6 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         currentWord = getNextWord();
 
         if (currentWord != null) {
-            // TODO: CREATEKEYBOARD FOR LANDSCAPE: if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT??
             createGuessWordArea(currentWord);
             createKeyboard();
         } else {
@@ -202,7 +218,6 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         currentWord = getNextWord();
 
         if (currentWord != null) {
-            // TODO: CREATEKEYBOARD FOR LANDSCAPE: if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT??
             resetValues();
             createGuessWordArea(currentWord);
         } else {
@@ -313,15 +328,19 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         }
     }
 
-    // TODO: CREATEKEYBOARD-METHOD FOR BOTH PORTRAIT AND LANDSCAPE? OR: JUST CHANGE THE TESTS
     public void createKeyboard() {
         LinearLayout layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_1);
 
         for (int i = 0; i < alphabetLetters.length; i++) {
-            if (i >= NEW_LINE_KEYBOARD_FIRST && i < NEW_LINE_KEYBOARD_SECOND) {
-                layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_2);
-            } else if (i >= NEW_LINE_KEYBOARD_SECOND) {
-                layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_3);
+
+            if (res.getConfiguration().orientation == 1) { // then it is ORIENTATION_PORTRAIT
+                if (i >= NEW_LINE_KEYBOARD_FIRST && i < NEW_LINE_KEYBOARD_SECOND)
+                    layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_2);
+                else if (i >= NEW_LINE_KEYBOARD_SECOND)
+                    layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_3);
+            } else { // then it is ORIENTATION_LANDSCAPE
+                if (i >= NEW_LINE_KEYBOARD_FIRST_LAND)
+                    layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_2);
             }
 
             // Creating a button (one button for each letter) for the keyboard and adding it to
@@ -364,9 +383,16 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
                 }
             });
 
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(KEYBOARD_WIDTH, KEYBOARD_HEIGHT);
-            layoutParams.setMargins(KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN);
-            buttonLetter.setLayoutParams(layoutParams);
+            // The keyboard-buttons in portrait and landscape are going to have different dimensions:
+            if(res.getConfiguration().orientation == 1) { // then it is ORIENTATION_PORTRAIT
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(KEYBOARD_WIDTH, KEYBOARD_HEIGHT);
+                layoutParams.setMargins(KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN);
+                buttonLetter.setLayoutParams(layoutParams);
+            } else {    // then it is ORIENTATION_LANDSCAPE
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(KEYBOARD_WIDTH_LAND, KEYBOARD_HEIGHT_LAND);
+                layoutParams.setMargins(KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN);
+                buttonLetter.setLayoutParams(layoutParams);
+            }
 
             layout.addView(buttonLetter);
         }

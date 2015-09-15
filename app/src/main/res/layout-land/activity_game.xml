@@ -99,15 +99,6 @@
                 android:gravity="center_horizontal" >
                 <!-- Buttons for each letter is created in the java-code -->
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/keyboard_layout_row_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_horizontal"
-                android:paddingBottom="@dimen/activity_horizontal_margin" >
-                <!-- Buttons for each letter is created in the java-code -->
-            </LinearLayout>
 
         </LinearLayout> <!-- End of layout for keyboard -->
 
