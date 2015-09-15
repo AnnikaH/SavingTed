@@ -80,7 +80,6 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         updateGamesWonTextView();
     }
 
-    // TODO: FINISH THIS
     // Store values
     @Override
     protected void onSaveInstanceState(Bundle outState) {
@@ -88,14 +87,13 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         outState.putStringArray("WORDS", words);
         outState.putInt("WORD_COUNTER", wordCounter);
         outState.putString("CURRENT_WORD", currentWord);
-        //Is set in onCreate so not necessary: outState.putStringArray("ALPHABET_LETTERS", alphabetLetters);
         outState.putInt("NUM_LETTERS_GUESSED", numLettersGuessed);
         outState.putInt("IMAGE_COUNTER", imageCounter);
         outState.putInt("GAMES_WON", gamesWon);
         outState.putInt("GAMES_TOTAL", gamesTotal);
         outState.putInt("CHOSEN_CATEGORY_INDEX", chosenCategoryIndex);
 
-        // Save all the buttons for the keyboard and the states they are in:
+        // Storing the text-color to each button in the keyboard:
         int[] buttonColorArray = new int[alphabetLetters.length];
 
         for (int i = 0; i < alphabetLetters.length; i++) {
@@ -106,17 +104,19 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 
         outState.putIntArray("BUTTON_COLORS", buttonColorArray);
 
-        // TODO:
-        /* TODO: Hva man må vite:
-            Hvilke bokstaver som er funnet i ordet man gjetter på
-            Hvordan keyboardet ser ut (bokstaver røde el. grønne el. hvite)
-            Hvilket bilde man har kommet til (imageCounter nok?)
-        */
+        // Storing how many letters have been guessed:
+        char[] currentGuessArea = new char[currentWord.length()];
+
+        for (int i = 0; i < currentWord.length(); i++) {
+            TextView guessAreaLetter = (TextView) findViewById(i);  // find each TextView in the guessing-area
+            currentGuessArea[i] = guessAreaLetter.getText().charAt(0);
+        }
+
+        outState.putCharArray("CURRENT_GUESS_AREA", currentGuessArea);
 
         super.onSaveInstanceState(outState);
     }
 
-    // TODO: FINISH THIS
     // Get stored values
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
@@ -126,7 +126,6 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         words = savedInstanceState.getStringArray("WORDS");
         wordCounter = savedInstanceState.getInt("WORD_COUNTER");
         currentWord = savedInstanceState.getString("CURRENT_WORD");
-        //Is set in onCreate so not necessary: alphabetLetters = savedInstanceState.getStringArray("ALPHABET_LETTERS");
         numLettersGuessed = savedInstanceState.getInt("NUM_LETTERS_GUESSED");
         imageCounter = savedInstanceState.getInt("IMAGE_COUNTER");
         gamesWon = savedInstanceState.getInt("GAMES_WON");
@@ -135,26 +134,41 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 
         showLastImage();
 
+        // GuessWordArea:
         createGuessWordArea(currentWord);
+        char[] currentGuessArea = savedInstanceState.getCharArray("CURRENT_GUESS_AREA");
+        updateGuessWordArea(currentGuessArea);
+
+        // Keyboard:
         createKeyboard();
-
         int[] buttonColorArray = savedInstanceState.getIntArray("BUTTON_COLORS");
+        updateKeyboard(buttonColorArray);
+    }
 
+    // Called from onRestoreInstanceState()
+    public void updateGuessWordArea(char[] currentGuessArea) {
+        for(int i = 0; i < currentGuessArea.length; i++) {
+            TextView guessAreaLetter = (TextView) findViewById(i);
+
+            char letter = currentGuessArea[i];
+
+            if(letter != '_')
+                guessAreaLetter.setText(letter + "");
+        }
+    }
+
+    // Called from onRestoreInstanceState()
+    public void updateKeyboard(int[] buttonColorArray) {
         for (int i = 0; i < buttonColorArray.length; i++) {
             Button button = (Button) findViewById(i + BUTTON_ID_START);
 
             int color = buttonColorArray[i];
 
-            if(color == Color.GREEN || color == Color.RED) {    // then the button has been clicked before
+            if (color == Color.GREEN || color == Color.RED) {    // then the button has been clicked before
                 button.setTextColor(color);
                 button.setEnabled(false);
             }
         }
-
-        // TODO:
-        /* TODO: Hva man må vite/få info om:
-            Hvilke bokstaver som er funnet i ordet man gjetter på
-        */
     }
 
     // Called from onRestoreInstanceState()
