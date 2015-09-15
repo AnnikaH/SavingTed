@@ -438,15 +438,18 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         }
     }
 
-    // TODO: clearKeyboard-method for both landscape and portrait - or if-test inside this
     public void clearKeyboard() {
         LinearLayout layoutRow1 = (LinearLayout) findViewById(R.id.keyboard_layout_row_1);
-        LinearLayout layoutRow2 = (LinearLayout) findViewById(R.id.keyboard_layout_row_2);
-        LinearLayout layoutRow3 = (LinearLayout) findViewById(R.id.keyboard_layout_row_3);
-
         layoutRow1.removeAllViews();
+
+        LinearLayout layoutRow2 = (LinearLayout) findViewById(R.id.keyboard_layout_row_2);
         layoutRow2.removeAllViews();
-        layoutRow3.removeAllViews();
+
+        if(res.getConfiguration().orientation == 1) {
+            // then it is ORIENTATION_PORTRAIT and portrait has 3 keyboard-rows
+            LinearLayout layoutRow3 = (LinearLayout) findViewById(R.id.keyboard_layout_row_3);
+            layoutRow3.removeAllViews();
+        }
     }
 
     public boolean correctGuessedLetter(char letter) {
