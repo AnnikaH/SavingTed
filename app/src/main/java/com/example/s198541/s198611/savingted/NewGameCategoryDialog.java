@@ -6,7 +6,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-public class NewGameDialog extends DialogFragment {
+public class NewGameCategoryDialog extends DialogFragment {
     private DialogClickListener callback;
 
     public interface DialogClickListener {
@@ -24,8 +24,8 @@ public class NewGameDialog extends DialogFragment {
         }
     }
 
-    public static NewGameDialog newInstance(String title, String[] items) {
-        NewGameDialog frag = new NewGameDialog();
+    public static NewGameCategoryDialog newInstance(String title, String[] items) {
+        NewGameCategoryDialog frag = new NewGameCategoryDialog();
         Bundle args = new Bundle();
         args.putString("title", title);
         args.putStringArray("items", items);

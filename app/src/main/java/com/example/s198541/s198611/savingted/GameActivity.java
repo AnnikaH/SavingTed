@@ -3,7 +3,6 @@ package com.example.s198541.s198611.savingted;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,7 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class GameActivity extends AppCompatActivity implements EndGameDialog.DialogClickListener,
-        EndSessionDialog.DialogClickListener, NewGameDialog.DialogClickListener, ResetWarningDialog.DialogClickListener {
+        EndSessionDialog.DialogClickListener, NewGameCategoryDialog.DialogClickListener, ResetWarningDialog.DialogClickListener {
 
     // TODO: Many of these values can be elements in dimens.xml and we can get to them via R.dimen.name ?
     private static final int GUESS_WORD_TEXT_SIZE = 20;
@@ -186,13 +184,13 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 
             // Pop-up-dialogs where the player chooses category:
             String catTitle = getString(R.string.choose_category);
-            NewGameDialog catDialog = NewGameDialog.newInstance(catTitle, categories);
+            NewGameCategoryDialog catDialog = NewGameCategoryDialog.newInstance(catTitle, categories);
             catDialog.show(getFragmentManager(), "TAG");
             // Waiting for the player to make a choice
         }
     }
 
-    // NewGameDialog-method:
+    // NewGameCategoryDialog-method:
     @Override
     public void onItemClick(int chosenItemIndex) {
         chosenCategoryIndex = chosenItemIndex;
@@ -208,7 +206,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         }
     }
 
-    // NewGameDialog-method:
+    // NewGameCategoryDialog-method:
     @Override
     public void onCancelClick() {
         finish();
@@ -268,7 +266,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         // Waiting for the user to make a choice
     }
 
-    // The user has chosen a category from the pop-up dialog NewGameDialog
+    // The user has chosen a category from the pop-up dialog NewGameCategoryDialog
     public void setWordsFromCategoryChoice() {
         // reading words from the right category from xml-file (arrays.xml):
         switch (chosenCategoryIndex) {
