@@ -22,21 +22,18 @@ import java.util.List;
 public class GameActivity extends AppCompatActivity implements EndGameDialog.DialogClickListener,
         EndSessionDialog.DialogClickListener, NewGameCategoryDialog.DialogClickListener, ResetWarningDialog.DialogClickListener {
 
-    // TODO: Many of these values can be elements in dimens.xml and we can get to them via R.dimen.name ?
     private static final int GUESS_WORD_TEXT_SIZE = 20;
     private static final int GUESS_WORD_PADDING = 8;
+    private static final int NEW_LINE_KEYBOARD_FIRST = 10;
+    private static final int NEW_LINE_KEYBOARD_SECOND = 20;
+    private static final int NEW_LINE_KEYBOARD_FIRST_LAND = 15;
     private static final int KEYBOARD_TEXT_SIZE = 16;
     private static final int KEYBOARD_MARGIN = 2;
     private static final int KEYBOARD_WIDTH = 38;
     private static final int KEYBOARD_HEIGHT = 55;
     private static final int KEYBOARD_WIDTH_LAND = 44;
     private static final int KEYBOARD_HEIGHT_LAND = 33;
-
-    private static final int NEW_LINE_KEYBOARD_FIRST = 10;
-    private static final int NEW_LINE_KEYBOARD_SECOND = 20;
-    private static final int NEW_LINE_KEYBOARD_FIRST_LAND = 15;
     private static final int BUTTON_ID_START = 50;
-
     private static final int[] IMAGE_IDS = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,
             R.drawable.hangman_4, R.drawable.hangman_5, R.drawable.hangman_6, R.drawable.hangman_siste};
 
@@ -96,26 +93,32 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 
         // Storing the text-color to each button in the keyboard:
         int[] buttonColorArray = new int[alphabetLetters.length];
+        addColorsToArray(buttonColorArray);
+        outState.putIntArray("BUTTON_COLORS", buttonColorArray);
 
+        // Storing how many letters have been guessed:
+        char[] currentGuessArea = new char[currentWord.length()];
+        addCharactersToArray(currentGuessArea);
+        outState.putCharArray("CURRENT_GUESS_AREA", currentGuessArea);
+
+        super.onSaveInstanceState(outState);
+    }
+
+    // Called from onSaveInstanceState()
+    public void addColorsToArray(int[] buttonColorArray) {
         for (int i = 0; i < alphabetLetters.length; i++) {
             Button keyboardButton = (Button) findViewById(i + BUTTON_ID_START);  // find each button
             int color = keyboardButton.getCurrentTextColor();
             buttonColorArray[i] = color;
         }
+    }
 
-        outState.putIntArray("BUTTON_COLORS", buttonColorArray);
-
-        // Storing how many letters have been guessed:
-        char[] currentGuessArea = new char[currentWord.length()];
-
+    // Called from onSaveInstanceState()
+    public void addCharactersToArray(char[] currentGuessArea) {
         for (int i = 0; i < currentWord.length(); i++) {
             TextView guessAreaLetter = (TextView) findViewById(i);  // find each TextView in the guessing-area
             currentGuessArea[i] = guessAreaLetter.getText().charAt(0);
         }
-
-        outState.putCharArray("CURRENT_GUESS_AREA", currentGuessArea);
-
-        super.onSaveInstanceState(outState);
     }
 
     // Get stored values
@@ -133,14 +136,15 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         gamesTotal = savedInstanceState.getInt("GAMES_TOTAL");
         chosenCategoryIndex = savedInstanceState.getInt("CHOSEN_CATEGORY_INDEX");
 
+        // Restore image:
         showLastImage();
 
-        // GuessWordArea:
+        // Restore guessWordArea:
         createGuessWordArea(currentWord);
         char[] currentGuessArea = savedInstanceState.getCharArray("CURRENT_GUESS_AREA");
         updateGuessWordArea(currentGuessArea);
 
-        // Keyboard:
+        // Restore keyboard:
         createKeyboard();
         int[] buttonColorArray = savedInstanceState.getIntArray("BUTTON_COLORS");
         updateKeyboard(buttonColorArray);
@@ -153,7 +157,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 
             char letter = currentGuessArea[i];
 
-            if(letter != '_')
+            if(letter != '_')   // not necessary to change the text if it is changed to what it was in the first place
                 guessAreaLetter.setText(letter + "");
         }
     }
@@ -174,7 +178,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 
     // Called from onRestoreInstanceState()
     public void showLastImage() {
-        if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT
+        if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT (image set to ImageView)
         {
             // show the image in the ImageView main_image:
             ImageView imageView = (ImageView) findViewById(R.id.main_image);
@@ -182,16 +186,16 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
             if (imageCounter == 0) { // the array IMAGE_IDS, that the imageCounter counts on, does not contain the first image
                 imageView.setBackgroundResource(R.drawable.hangman_forste);
             } else {
-                imageView.setBackgroundResource(IMAGE_IDS[imageCounter - 1]);
+                imageView.setBackgroundResource(IMAGE_IDS[imageCounter - 1]); // because of imageCounter++ when an image is set
             }
-        } else {    // then it is ORIENTATION_LANDSCAPE (2)
+        } else {    // then it is ORIENTATION_LANDSCAPE (2) (image set to LinearLayout)
             // show the image in the LinearLayout image_layout_land:
             LinearLayout layout = (LinearLayout) findViewById(R.id.image_layout_land);
 
             if (imageCounter == 0) { // the array IMAGE_IDS, that the imageCounter counts on, does not contain the first image
                 layout.setBackgroundResource(R.drawable.hangman_forste);
             } else {
-                layout.setBackgroundResource(IMAGE_IDS[imageCounter - 1]);
+                layout.setBackgroundResource(IMAGE_IDS[imageCounter - 1]); // because of imageCounter++ when an image is set
             }
         }
     }
@@ -199,11 +203,8 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_game);
-
         res = getResources();
-
         alphabetLetters = res.getStringArray(R.array.listAlphabet);
 
         // If there is no saved instance yet:
@@ -313,6 +314,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
                 String[] animalsWords = res.getStringArray(R.array.listWordsAnimals);
 
                 List<String> allWords = new ArrayList<>();
+
                 allWords.addAll(Arrays.asList(atTheStoreWords));
                 allWords.addAll(Arrays.asList(outsideWords));
                 allWords.addAll(Arrays.asList(animalsWords));
@@ -357,75 +359,67 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     }
 
     public void createKeyboard() {
-        LinearLayout layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_1);
+        LinearLayout layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_1); // place button/letter on row 1
 
+        // Going through all the letters and creating a button for each letter:
         for (int i = 0; i < alphabetLetters.length; i++) {
 
             if (res.getConfiguration().orientation == 1) { // then it is ORIENTATION_PORTRAIT
-                if (i >= NEW_LINE_KEYBOARD_FIRST && i < NEW_LINE_KEYBOARD_SECOND)
+                if (i >= NEW_LINE_KEYBOARD_FIRST && i < NEW_LINE_KEYBOARD_SECOND) // then place button/letter on row 2
                     layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_2);
-                else if (i >= NEW_LINE_KEYBOARD_SECOND)
+                else if (i >= NEW_LINE_KEYBOARD_SECOND) // then place button/letter on row 3
                     layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_3);
-            } else { // then it is ORIENTATION_LANDSCAPE
-                if (i >= NEW_LINE_KEYBOARD_FIRST_LAND)
+            } else { // then it is ORIENTATION_LANDSCAPE (2)
+                if (i >= NEW_LINE_KEYBOARD_FIRST_LAND) // then place button/letter on row 2
                     layout = (LinearLayout) findViewById(R.id.keyboard_layout_row_2);
             }
 
-            // Creating a button (one button for each letter) for the keyboard and adding it to
-            // the specified layout:
-            Button buttonLetter = new Button(this);
-            buttonLetter.setId(i + BUTTON_ID_START);
-            buttonLetter.setTextColor(Color.WHITE);
-            buttonLetter.setTextSize(KEYBOARD_TEXT_SIZE);
-            buttonLetter.setText(alphabetLetters[i]);
-            buttonLetter.setBackgroundResource(R.drawable.custom_button);
-
+            // Creating a button (one button for each letter) for the keyboard and adding it to the specified layout:
+            Button buttonLetter = createButton(i);
             buttonLetter.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View view) {
                     Button b = (Button) view;
                     char guessedLetter = b.getText().charAt(0);
 
-                    // disable onclick on the button:
-                    b.setEnabled(false);
+                    b.setEnabled(false); // disabling onclick on the button
 
-                    if (correctGuessedLetter(guessedLetter)) {
-                        // change color for the letter to green:
+                    if (correctGuessedLetter(guessedLetter)) {  // then change color for the letter to green:
                         b.setTextColor(Color.GREEN);
 
-                        if (numLettersGuessed >= currentWord.length())
-                            // the word is guessed - the player won
+                        if (numLettersGuessed >= currentWord.length())  // the word is guessed - the player won
                             endOfGameDialog(true);
-                    } else {
-                        // change color for the letter to red
+                    } else {    // then change color for the letter to red:
                         b.setTextColor(Color.RED);
 
                         showNextImage();
 
                         // If this was the last image: weren't able to guess the word
-                        // If now, after imageCounter++, imageCounter is the same as the length of
-                        // the image-array, the last image has just been shown, and the player
-                        // weren't able to guess the word
+                        // If now, after imageCounter++ (set in showNextImage()), imageCounter is the
+                        // same as the length of the image-array, the last image has just been shown,
+                        // and the player weren't able to guess the word
                         if (imageCounter >= IMAGE_IDS.length)
                             endOfGameDialog(false);
                     }
                 }
             });
 
-            // The keyboard-buttons in portrait and landscape are going to have different dimensions:
-            if (res.getConfiguration().orientation == 1) { // then it is ORIENTATION_PORTRAIT
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(KEYBOARD_WIDTH, KEYBOARD_HEIGHT);
-                layoutParams.setMargins(KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN);
-                buttonLetter.setLayoutParams(layoutParams);
-            } else {    // then it is ORIENTATION_LANDSCAPE
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(KEYBOARD_WIDTH_LAND, KEYBOARD_HEIGHT_LAND);
-                layoutParams.setMargins(KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN);
-                buttonLetter.setLayoutParams(layoutParams);
-            }
-
+            setLayoutParams(buttonLetter);
             layout.addView(buttonLetter);
         }
     }
 
+    // Called from createKeyboard()
+    public Button createButton(int i) {
+        Button buttonLetter = new Button(this);
+        buttonLetter.setId(i + BUTTON_ID_START);
+        buttonLetter.setTextColor(Color.WHITE);
+        buttonLetter.setTextSize(KEYBOARD_TEXT_SIZE);
+        buttonLetter.setText(alphabetLetters[i]);
+        buttonLetter.setBackgroundResource(R.drawable.custom_button);
+        return buttonLetter;
+    }
+
+    // Called from createKeyboard() inside onClick() to Button
     public void showNextImage() {
         if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT
         {
@@ -439,6 +433,21 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         }
     }
 
+    // Called from createKeyboard()
+    public void setLayoutParams(Button buttonLetter) {
+        LinearLayout.LayoutParams layoutParams;
+
+        // The keyboard-buttons in portrait and landscape are going to have different dimensions:
+        if (res.getConfiguration().orientation == 1) { // then it is ORIENTATION_PORTRAIT
+            layoutParams = new LinearLayout.LayoutParams(KEYBOARD_WIDTH, KEYBOARD_HEIGHT);
+        } else {    // then it is ORIENTATION_LANDSCAPE
+            layoutParams = new LinearLayout.LayoutParams(KEYBOARD_WIDTH_LAND, KEYBOARD_HEIGHT_LAND);
+        }
+
+        layoutParams.setMargins(KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN, KEYBOARD_MARGIN);
+        buttonLetter.setLayoutParams(layoutParams);
+    }
+
     public void clearKeyboard() {
         LinearLayout layoutRow1 = (LinearLayout) findViewById(R.id.keyboard_layout_row_1);
         layoutRow1.removeAllViews();
@@ -446,8 +455,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         LinearLayout layoutRow2 = (LinearLayout) findViewById(R.id.keyboard_layout_row_2);
         layoutRow2.removeAllViews();
 
-        if(res.getConfiguration().orientation == 1) {
-            // then it is ORIENTATION_PORTRAIT and portrait has 3 keyboard-rows
+        if(res.getConfiguration().orientation == 1) { // then it is ORIENTATION_PORTRAIT and portrait has 3 keyboard-rows
             LinearLayout layoutRow3 = (LinearLayout) findViewById(R.id.keyboard_layout_row_3);
             layoutRow3.removeAllViews();
         }
@@ -483,7 +491,6 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         }
 
         gamesTotal++;
-
         updateGamesWonTextView();
 
         // Creating pop-up/dialog with title and message that has an OK-button:
@@ -499,8 +506,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         imageCounter = 0;
 
         // reset image:
-        if (res.getConfiguration().orientation == 1) // then it is ORIENTATION_PORTRAIT)
-        {
+        if (res.getConfiguration().orientation == 1) { // then it is ORIENTATION_PORTRAIT)
             ImageView imageView = (ImageView) findViewById(R.id.main_image);
             imageView.setBackgroundResource(R.drawable.hangman_forste);
         } else { // then it is ORIENTATION_LANDSCAPE (2)
@@ -517,8 +523,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         String title = getString(R.string.end_of_session_title);
         String message = getString(R.string.end_of_session);
 
-        // Creating pop-up/dialog with title and message that has a NEW GAME-button and a
-        // QUIT-button:
+        // Creating pop-up/dialog with title and message that has a NEW GAME-button and a QUIT-button:
         EndSessionDialog dialog = EndSessionDialog.newInstance(title, message);
         dialog.show(getFragmentManager(), "TAG");
         // When the user clicks NEW GAME the method onNewGameClick() is called
