@@ -96,7 +96,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         addColorsToArray(buttonColorArray);
         outState.putIntArray("BUTTON_COLORS", buttonColorArray);
 
-        // Storing how many letters have been guessed:
+        // Storing how many/which letters have been guessed:
         char[] currentGuessArea = new char[currentWord.length()];
         addCharactersToArray(currentGuessArea);
         outState.putCharArray("CURRENT_GUESS_AREA", currentGuessArea);
@@ -116,8 +116,8 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     // Called from onSaveInstanceState()
     public void addCharactersToArray(char[] currentGuessArea) {
         for (int i = 0; i < currentWord.length(); i++) {
-            TextView guessAreaLetter = (TextView) findViewById(i);  // find each TextView in the guessing-area
-            currentGuessArea[i] = guessAreaLetter.getText().charAt(0);
+            TextView guessAreaLetter = (TextView) findViewById(i);  // find each TextView in the guess-area
+            currentGuessArea[i] = guessAreaLetter.getText().charAt(0);  // get the letter
         }
     }
 
@@ -273,7 +273,6 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     public void onResetClick() {
         gamesWon = 0;
         gamesTotal = 0;
-
         updateGamesWonTextView();
     }
 
@@ -291,7 +290,6 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
 
         ResetWarningDialog dialog = ResetWarningDialog.newInstance(title, message);
         dialog.show(getFragmentManager(), "TAG");
-
         // Waiting for the user to make a choice
     }
 
