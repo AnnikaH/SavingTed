@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingEnd="@dimen/land_buttons_horizontal_margin"
+        android:paddingEnd="@dimen/buttons_horizontal_margin_land"
         android:paddingTop="@dimen/activity_vertical_margin_land"
         android:gravity="end">
 
@@ -29,7 +29,7 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:onClick="newGameButtonClicked"
-            android:textColor="@color/white" />
+            android:textColor="@android:color/white" />
         <Button
             android:layout_width="@dimen/menu_button_width"
             android:layout_height="@dimen/menu_button_height"
@@ -40,7 +40,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:onClick="rulesButtonClicked"
-            android:textColor="@color/white" />
+            android:textColor="@android:color/white" />
         <Button
             android:layout_width="@dimen/menu_button_width"
             android:layout_height="@dimen/menu_button_height"
@@ -51,7 +51,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:onClick="settingsButtonClicked"
-            android:textColor="@color/white" />
+            android:textColor="@android:color/white" />
         <Button
             android:layout_width="@dimen/menu_button_width"
             android:layout_height="@dimen/menu_button_height"
@@ -61,7 +61,7 @@
             android:id="@+id/quit_menu_button"
             android:layout_gravity="center_horizontal"
             android:onClick="quitButtonClicked"
-            android:textColor="@color/white" />
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 

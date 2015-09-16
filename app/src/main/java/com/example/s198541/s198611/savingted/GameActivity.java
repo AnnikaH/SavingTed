@@ -25,15 +25,16 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     // TODO: Many of these values can be elements in dimens.xml and we can get to them via R.dimen.name ?
     private static final int GUESS_WORD_TEXT_SIZE = 20;
     private static final int GUESS_WORD_PADDING = 8;
-    private static final int NEW_LINE_KEYBOARD_FIRST = 10;
-    private static final int NEW_LINE_KEYBOARD_SECOND = 20;
-    private static final int NEW_LINE_KEYBOARD_FIRST_LAND = 15;
     private static final int KEYBOARD_TEXT_SIZE = 16;
     private static final int KEYBOARD_MARGIN = 2;
     private static final int KEYBOARD_WIDTH = 38;
     private static final int KEYBOARD_HEIGHT = 55;
     private static final int KEYBOARD_WIDTH_LAND = 44;
     private static final int KEYBOARD_HEIGHT_LAND = 33;
+
+    private static final int NEW_LINE_KEYBOARD_FIRST = 10;
+    private static final int NEW_LINE_KEYBOARD_SECOND = 20;
+    private static final int NEW_LINE_KEYBOARD_FIRST_LAND = 15;
     private static final int BUTTON_ID_START = 50;
 
     private static final int[] IMAGE_IDS = {R.drawable.hangman_1, R.drawable.hangman_2, R.drawable.hangman_3,

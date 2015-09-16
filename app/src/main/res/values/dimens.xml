@@ -16,15 +16,16 @@
     <dimen name="reset_button_width">95dp</dimen>
     <dimen name="reset_button_height">28dp</dimen>
     <dimen name="reset_layout_padding">5dp</dimen>
-    <dimen name="text_size_reset_button">14sp</dimen>
+    <dimen name="reset_button_text_size">14sp</dimen>
 
-    <dimen name="land_buttons_horizontal_margin">42dp</dimen>
-    <dimen name="land_guessed_letters_vertical_margin">120dp</dimen>
+    <dimen name="buttons_horizontal_margin_land">42dp</dimen>
+    <dimen name="guessed_letters_vertical_margin_land">120dp</dimen>
 
-    <dimen name="land_rules_textview_width">250dp</dimen>
+    <dimen name="rules_textview_width_land">250dp</dimen>
 
     <dimen name="activity_vertical_margin_land">12dp</dimen>
 
     <!-- Rules-page -->
-    <dimen name="land_rules_vertical_margin">30dp</dimen>
+    <dimen name="rules_vertical_margin_land">30dp</dimen>
+    <dimen name="rules_horizontal_margin_land">30dp</dimen>
 </resources>

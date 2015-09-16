@@ -53,11 +53,11 @@
                 android:layout_width="@dimen/reset_button_width"
                 android:layout_height="@dimen/reset_button_height"
                 android:text="@string/reset_games_title"
-                android:textColor="@color/white"
+                android:textColor="@android:color/white"
                 android:textAllCaps="false"
                 android:background="@drawable/menu_button_background"
                 android:layout_marginTop="@dimen/reset_layout_padding"
-                android:textSize="@dimen/text_size_reset_button"
+                android:textSize="@dimen/reset_button_text_size"
                 android:onClick="resetButtonClicked" />
 
         </LinearLayout>

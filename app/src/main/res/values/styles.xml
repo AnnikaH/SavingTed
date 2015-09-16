@@ -5,8 +5,9 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="preferencesStyle" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="android:windowBackground">@color/grassGreen</item>
+    <!-- Custom: -->
+    <style name="PreferencesStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@color/skyBlue</item>
     </style>
 
 </resources>
