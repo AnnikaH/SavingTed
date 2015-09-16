@@ -413,7 +413,7 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
         buttonLetter.setTextColor(Color.WHITE);
         buttonLetter.setTextSize(KEYBOARD_TEXT_SIZE);
         buttonLetter.setText(alphabetLetters[i]);
-        buttonLetter.setBackgroundResource(R.drawable.custom_button);
+        buttonLetter.setBackgroundResource(R.drawable.custom_keyboard_button);
         return buttonLetter;
     }
 
