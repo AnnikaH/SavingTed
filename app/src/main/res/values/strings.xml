@@ -27,10 +27,8 @@
 
     <string name="change_category_title">Category</string>
     <string name="choose_category">Choose a category</string>
-    <string name="change_difficulty_title">Difficulty</string>
     <string name="change_language_title">Language</string>
     <string name="reset_games_title">Reset</string>
-    <string name="reset_games">Reset number of games played and games won</string>
     <string name="reset_warning_title">Are you sure?</string>
     <string name="reset_warning_message">Do you really want to reset the number of games won and the number of games played?</string>
 

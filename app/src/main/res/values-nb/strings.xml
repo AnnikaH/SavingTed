@@ -22,14 +22,12 @@
 
     <string name="change_category_title">Kategori</string>
     <string name="choose_category">Velg kategori</string>
-    <string name="change_difficulty_title">Vanskelighetsgrad</string>
     <string name="change_language_title">Språk</string>
     <string name="reset_games_title">Nullstill</string>
-    <string name="reset_games">Nullstill antall spilte spill og antall spill vunnet</string>
     <string name="reset_warning_title">Er du sikker?</string>
     <string name="reset_warning_message">Vil du virkelig nullstille antall spill vunnet og antall spilte spill?</string>
 
-    <string name="games_won">Vunnet/Total:</string>
+    <string name="games_won">Vunnet/Totalt:</string>
 
     <string name="cancel">Avbryt</string>
 </resources>
