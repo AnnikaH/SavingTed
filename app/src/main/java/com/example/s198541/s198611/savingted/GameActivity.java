@@ -48,6 +48,47 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
     private int gamesTotal;
     private int chosenCategoryIndex;
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_game);
+        res = getResources();
+        alphabetLetters = res.getStringArray(R.array.listAlphabet);
+
+        // If there is no saved instance yet:
+        if (savedInstanceState == null) { // Then: create pop-up to choose category:
+            String[] categories = res.getStringArray(R.array.listCategories);
+
+            // Pop-up-dialogs where the player chooses category:
+            String catTitle = getString(R.string.choose_category);
+            NewGameCategoryDialog catDialog = NewGameCategoryDialog.newInstance(catTitle, categories);
+            catDialog.show(getFragmentManager(), "TAG");
+            // Waiting for the player to make a choice
+        }
+    }
+
+    // NewGameCategoryDialog-method:
+    @Override
+    public void onItemClick(int chosenItemIndex) {
+        chosenCategoryIndex = chosenItemIndex;
+        setWordsFromCategoryChoice();
+
+        currentWord = getNextWord();
+
+        if (currentWord != null) {
+            createGuessWordArea(currentWord);
+            createKeyboard();
+        } else {
+            endOfSessionDialog();
+        }
+    }
+
+    // NewGameCategoryDialog-method:
+    @Override
+    public void onCancelClick() {
+        finish();
+    }
+
     // Store in SharedPreferences:
     @Override
     protected void onPause() {
@@ -198,47 +239,6 @@ public class GameActivity extends AppCompatActivity implements EndGameDialog.Dia
                 layout.setBackgroundResource(IMAGE_IDS[imageCounter - 1]); // because of imageCounter++ when an image is set
             }
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
-        res = getResources();
-        alphabetLetters = res.getStringArray(R.array.listAlphabet);
-
-        // If there is no saved instance yet:
-        if (savedInstanceState == null) { // Then: create pop-up to choose category:
-            String[] categories = res.getStringArray(R.array.listCategories);
-
-            // Pop-up-dialogs where the player chooses category:
-            String catTitle = getString(R.string.choose_category);
-            NewGameCategoryDialog catDialog = NewGameCategoryDialog.newInstance(catTitle, categories);
-            catDialog.show(getFragmentManager(), "TAG");
-            // Waiting for the player to make a choice
-        }
-    }
-
-    // NewGameCategoryDialog-method:
-    @Override
-    public void onItemClick(int chosenItemIndex) {
-        chosenCategoryIndex = chosenItemIndex;
-        setWordsFromCategoryChoice();
-
-        currentWord = getNextWord();
-
-        if (currentWord != null) {
-            createGuessWordArea(currentWord);
-            createKeyboard();
-        } else {
-            endOfSessionDialog();
-        }
-    }
-
-    // NewGameCategoryDialog-method:
-    @Override
-    public void onCancelClick() {
-        finish();
     }
 
     // EndGameDialog-method:
